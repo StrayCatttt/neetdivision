@@ -35,9 +35,18 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       className="fixed bottom-8 right-8 p-3 bg-neon text-black rounded-full shadow-[0_0_20px_rgba(204,255,0,0.5)] hover:bg-white hover:scale-110 transition-all duration-300 z-50 group"
       aria-label="Scroll to top"
-      style={{ colorScheme: 'light' }}
+      style={{
+        colorScheme: 'light',
+        backgroundColor: '#ccff00',
+        color: '#000'
+      }}
     >
-      <ArrowUp size={24} strokeWidth={3} className="group-hover:-translate-y-1 transition-transform duration-300" style={{ color: '#000' }} />
+      <ArrowUp
+        size={24}
+        strokeWidth={3}
+        className="group-hover:-translate-y-1 transition-transform duration-300"
+        style={{ color: '#000', stroke: '#000' }}
+      />
     </button>
   );
 }
