@@ -5,7 +5,7 @@ export default function Achievements() {
     <div className="min-h-screen pt-32 pb-24 px-4 md:px-12 bg-black text-white">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-6xl md:text-8xl font-bold mb-16 text-center md:text-right italic">
-          ACHIEVE<span className="text-neon">MENTS</span>
+          HIS<span className="text-neon">TORY</span>
         </h1>
 
         <div className="space-y-12">

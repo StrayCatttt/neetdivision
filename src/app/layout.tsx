@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 import Header from "@/components/layout/Header";
+import ScrollToTop from "@/components/layout/ScrollToTop";
+import EasterEgg from "@/components/layout/EasterEgg";
 
 export default function RootLayout({
     children,
@@ -28,8 +30,10 @@ export default function RootLayout({
     return (
         <html lang="ja">
             <body className={cn(futuraBold.variable, futuraLight.variable, "bg-black text-white font-sans selection:bg-neon selection:text-black")}>
+                <EasterEgg />
                 <Header />
                 {children}
+                <ScrollToTop />
             </body>
         </html>
     );

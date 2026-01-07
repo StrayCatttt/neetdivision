@@ -51,9 +51,9 @@ export default function Creator() {
                             <h2 className="text-5xl font-bold mb-2 tracking-widest">Stray</h2>
                             <p className="text-neon font-bold tracking-[0.3em] mb-6 text-xl">MAIN DEVELOPER</p>
                             <p className="text-gray-300 text-lg leading-relaxed mb-8 font-body">
-                                このカオスなサイトをまとめ上げた孤独な開発者。
+                                サイトを作るノウハウが1ミリもない哀れな開発者。
                                 LoL自体はプレイしておらず、配信ばかり見ている猫が好きなだけのオタク。
-                                マウスとキーボードより猫の肉球に触れていたい。
+                                マウスとキーボードより猫の肉球に触れていたい。三度の飯より猫だよなぁ？
                             </p>
                             <div className="flex gap-6 justify-center md:justify-start items-center">
                                 <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon transition-all">

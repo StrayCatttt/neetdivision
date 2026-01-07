@@ -55,9 +55,10 @@ export default function Recruit() {
                         href="https://docs.google.com/forms/d/e/1FAIpQLSeHHF9E10j1-xMHZxQmOXHOtbJ6xNLRqVFMN3bWHStMq88y-Q/viewform?pli=1"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block w-full py-6 bg-white text-black font-heading font-black text-2xl md:text-3xl uppercase transition-all hover:bg-neon hover:tracking-[0.2em] transform active:scale-95"
+                        className="block w-full py-6 bg-white text-black font-heading font-black text-2xl md:text-3xl uppercase transition-all hover:bg-neon hover:tracking-[0.2em] transform active:scale-95 leading-tight"
                     >
-                        League of Legends部門に登録する
+                        <span className="inline-block">League of Legends部門</span>
+                        <span className="inline-block">に登録する</span>
                     </a>
                 </div>
             </div>
