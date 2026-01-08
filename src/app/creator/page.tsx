@@ -55,19 +55,25 @@ export default function Creator() {
                                 LoL自体はプレイしておらず、配信ばかり見ている猫が好きなだけのオタク。
                                 マウスとキーボードより猫の肉球に触れていたい。三度の飯より猫だよなぁ？
                             </p>
-                            <div className="flex gap-6 justify-center md:justify-start items-center">
-                                <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon transition-all">
-                                    <Twitter size={28} />
-                                </a>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex gap-6 justify-center md:justify-start items-center">
+                                    <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon transition-all">
+                                        <Twitter size={28} />
+                                    </a>
 
-                                {/*
-                                <button
-                                    onClick={handleCheckout}
-                                    className="px-6 py-3 bg-black border border-neon text-neon font-bold uppercase hover:bg-neon hover:text-black transition-all flex items-center gap-2"
-                                >
-                                    Strayを支援 (コーヒーを一杯おごる)
-                                </button>
-                                */}
+                                    <button
+                                        className="px-6 py-3 bg-black border border-gray-600 text-gray-500 font-bold uppercase cursor-not-allowed flex items-center gap-2"
+                                        title="現在Stripeアカウント調整中のため停止中"
+                                    >
+                                        Strayを支援 (停止中)
+                                    </button>
+                                </div>
+
+                                <span className="inline-block text-sm font-bold border-b border-white hover:border-neon hover:text-neon transition-all self-start md:self-auto cursor-pointer">
+                                    <a href="https://stray-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
+                                        Strayについて知る
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
