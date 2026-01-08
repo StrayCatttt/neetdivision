@@ -55,7 +55,7 @@ export default function Creator() {
                                 LoL自体はプレイしておらず、配信ばかり見ている猫が好きなだけのオタク。
                                 マウスとキーボードより猫の肉球に触れていたい。三度の飯より猫だよなぁ？
                             </p>
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4 items-start">
                                 <div className="flex gap-6 justify-center md:justify-start items-center">
                                     <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon transition-all">
                                         <Twitter size={28} />
@@ -69,7 +69,7 @@ export default function Creator() {
                                     </button>
                                 </div>
 
-                                <span className="inline-block text-sm font-bold border-b border-white hover:border-neon hover:text-neon transition-all self-start md:self-auto cursor-pointer">
+                                <span className="inline-block text-sm font-bold border-b border-neon text-neon hover:border-white hover:text-white transition-all w-fit cursor-pointer">
                                     <a href="https://stray-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
                                         Strayについて知る
                                     </a>

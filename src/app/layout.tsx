@@ -55,6 +55,7 @@ export default function RootLayout({
     return (
         <html lang="ja">
             <body className={cn(futuraBold.variable, futuraLight.variable, "bg-black text-white font-sans selection:bg-neon selection:text-black")}>
+                <meta name="color-scheme" content="light" />
                 <EasterEgg />
                 <Header />
                 {children}
