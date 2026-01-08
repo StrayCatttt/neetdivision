@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         type: 'website',
         images: [
             {
-                url: '/images/ogp_light.png',
+                url: '/images/ogp_final.png',
                 width: 1200,
                 height: 630,
                 alt: 'NEET DIVISION',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: "NEET DIVISION",
         description: "WE ARE THE SLUMS. NEET DIVISION Official Website.",
-        images: ['/images/ogp_light.png'], // Default to light mode image as primary
+        images: ['/images/ogp_final.png'], // Default to light mode image as primary
     },
 };
 
