@@ -56,6 +56,18 @@ export default function RootLayout({
         <html lang="ja">
             <body className={cn(futuraBold.variable, futuraLight.variable, "bg-black text-white font-sans selection:bg-neon selection:text-black")}>
                 <meta name="color-scheme" content="light" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "name": "NEET DIVISION",
+                            "alternateName": ["neetdivision", "neet division"],
+                            "url": "https://neetdivision.vercel.app",
+                        }),
+                    }}
+                />
                 <EasterEgg />
                 <Header />
                 {children}
