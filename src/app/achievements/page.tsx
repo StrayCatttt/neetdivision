@@ -58,7 +58,7 @@ export default function Achievements() {
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-10 md:w-1/2 flex flex-col justify-center text-right items-end">
+              <div className="p-10 md:w-1/2 flex flex-col justify-center">
                 <div className="mb-4">
                   <span className="text-white font-bold text-xl mb-1 block tracking-wider">2026.01.19</span>
                   <h3 className="text-4xl font-bold text-white group-hover:text-neon transition-colors tracking-tight">KZHCUP RUMBLE</h3>
@@ -121,7 +121,7 @@ export default function Achievements() {
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-10 md:w-1/2 flex flex-col justify-center text-right items-end">
+              <div className="p-10 md:w-1/2 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <span className="text-white font-bold text-xl mb-1 block tracking-wider">2025.06 - 12 (6 Months)</span>
