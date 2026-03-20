@@ -55,6 +55,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ja">
+            <head>
+                {/* Google AdSense */}
+                <Script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9269179060215740"
+                    crossOrigin="anonymous"
+                    strategy="beforeInteractive"
+                />
+            </head>
             <body className={cn(futuraBold.variable, futuraLight.variable, "bg-black text-white font-sans selection:bg-neon selection:text-black")}>
                 <meta name="color-scheme" content="light" />
                 <script
@@ -73,14 +82,6 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <ScrollToTop />
-                
-                {/* Google AdSense */}
-                <Script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9269179060215740"
-                    crossOrigin="anonymous"
-                    strategy="afterInteractive"
-                />
             </body>
         </html>
     );
