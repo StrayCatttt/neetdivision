@@ -14,7 +14,7 @@ export async function POST() {
                     price_data: {
                         currency: 'jpy',
                         product_data: {
-                            name: 'Strayへコーヒーを一杯おごる',
+                            name: 'NEET DIVISION デジタルコンテンツ提供',
                         },
                         unit_amount: 100,
                     },
@@ -22,7 +22,7 @@ export async function POST() {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/donation/success`,
+            success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/archive-access/success`,
             cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/creator`,
         });
 

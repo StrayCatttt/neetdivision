@@ -63,10 +63,10 @@ export default function Creator() {
 
                                     <button
                                         onClick={handleCheckout}
-                                        className="px-6 py-3 bg-neon text-black font-bold uppercase cursor-pointer flex items-center gap-2 hover:bg-white hover:scale-105 transition-all"
+                                        className="px-6 py-3 bg-neon text-black font-bold uppercase cursor-pointer flex items-center gap-2 hover:bg-white hover:scale-105 transition-all shadow-[0_4px_14px_0_rgba(204,255,0,0.39)]"
                                         style={{ backgroundColor: '#ccff00', color: '#000' }}
                                     >
-                                        ☕ コーヒーを一杯おごる
+                                        アーカイブへのアクセス権を購入
                                     </button>
                                 </div>
 
