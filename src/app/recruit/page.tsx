@@ -49,20 +49,6 @@ export default function Recruit() {
                         <p className="mt-4 text-sm text-white tracking-wide">※これに参加していないと、スラムの門は開きません。</p>
                     </div>
                 </div>
-
-                <div className="text-center">
-                    <p className="text-gray-400 mb-8">すべての条件を満たし、覚悟が固まった者のみ、以下のリンクより志願してください。</p>
-                    <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSeHHF9E10j1-xMHZxQmOXHOtbJ6xNLRqVFMN3bWHStMq88y-Q/viewform?pli=1"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full py-6 bg-white text-black font-heading font-black text-2xl md:text-3xl uppercase transition-all hover:bg-neon hover:scale-105 leading-tight"
-                        style={{ backgroundColor: '#fff', color: '#000' }}
-                    >
-                        <span className="inline-block">League of Legends部門</span>
-                        <span className="inline-block">に登録する</span>
-                    </a>
-                </div>
             </div>
         </div>
     );
