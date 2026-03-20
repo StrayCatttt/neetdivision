@@ -62,10 +62,11 @@ export default function Creator() {
                                     </a>
 
                                     <button
-                                        className="px-6 py-3 bg-black border border-gray-600 text-gray-500 font-bold uppercase cursor-not-allowed flex items-center gap-2"
-                                        title="現在Stripeアカウント調整中のため停止中"
+                                        onClick={handleCheckout}
+                                        className="px-6 py-3 bg-neon text-black font-bold uppercase cursor-pointer flex items-center gap-2 hover:bg-white hover:scale-105 transition-all"
+                                        style={{ backgroundColor: '#ccff00', color: '#000' }}
                                     >
-                                        Strayを支援 (停止中)
+                                        ☕ コーヒーを一杯おごる
                                     </button>
                                 </div>
 
