@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     verification: {
         google: "maOTMOwjA5BbAYPy_rkoO8LkXhiUedvHix47xvaC4v8",
     },
+    other: {
+        "google-adsense-account": "ca-pub-9269179060215740",
+    },
     openGraph: {
         title: "NEET DIVISION",
         description: "WE ARE THE SLUMS. NEET DIVISION Official Website.",
