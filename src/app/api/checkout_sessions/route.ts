@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -7,6 +8,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST() {
     try {
+        const headersList = await headers();
+        const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:3000';
+        const protocol = headersList.get('x-forwarded-proto') || 'https';
+        const origin = `${protocol}://${host}`;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -22,8 +28,8 @@ export async function POST() {
                 },
             ],
             mode: 'payment',
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/order/success`,
-            cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/creator`,
+            success_url: `${origin}/order/success`,
+            cancel_url: `${origin}/creator`,
         });
 
         return NextResponse.json({ sessionId: session.id, url: session.url });
