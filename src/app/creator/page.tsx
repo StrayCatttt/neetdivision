@@ -62,11 +62,10 @@ export default function Creator() {
                                     </a>
 
                                     <button
-                                        onClick={handleCheckout}
-                                        className="px-6 py-3 bg-neon text-black font-bold uppercase cursor-pointer flex items-center gap-2 hover:bg-white hover:scale-105 transition-all shadow-[0_4px_14px_0_rgba(204,255,0,0.39)]"
-                                        style={{ backgroundColor: '#ccff00', color: '#000' }}
+                                        disabled
+                                        className="px-6 py-3 bg-zinc-800 text-zinc-500 font-bold uppercase cursor-not-allowed flex items-center gap-2 transition-all opacity-50"
                                     >
-                                        アーカイブへのアクセス権を購入
+                                        現在停止中
                                     </button>
                                 </div>
 

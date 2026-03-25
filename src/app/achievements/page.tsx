@@ -28,7 +28,7 @@ export default function Achievements() {
               <div className="p-10 md:w-1/2 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <span className="text-neon font-bold text-xl mb-1 block tracking-wider">2026.02 -</span>
+                    <span className="text-neon font-bold text-xl mb-1 block tracking-wider">2026.02 - 04</span>
                     <h3 className="text-4xl font-bold text-white group-hover:text-neon transition-colors tracking-tight">k4sen学院</h3>
                   </div>
                 </div>
