@@ -7,7 +7,7 @@ export default function EasterEgg() {
         const style2 = "background: #000; color: #ccff00; font-size: 20px; font-weight: bold; padding: 10px;";
         const style3 = "color: #ff0000; font-size: 14px; font-weight: bold; margin-top: 5px;";
 
-        console.log("%c NEET DIVISION %c WELCOME TO THE SLUMS ", style1, style2);
+        console.log("%c NEET DIVISION %c WELCOME TO SLUM DEV ", style1, style2);
         console.log("%c 警告：深淵を覗くとき、深淵もまたこちらを覗いている。", style3);
         console.log("%c (ソースコードを見ても猫の画像しかありませんよ？)", "color: #888; font-size: 12px;");
     }, []);

@@ -49,6 +49,12 @@ export default function Recruit() {
                         <p className="mt-4 text-sm text-white tracking-wide">※これに参加していないと、スラムの門は開きません。</p>
                     </div>
                 </div>
+                {/* Slum Dev Link */}
+                <div className="mt-24 text-center text-zinc-500 font-bold tracking-widest text-sm">
+                    <a href="https://github.com/Slum-Dev/neetdiv_form" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
+                        Recruit System
+                    </a> Developed by SLUM DEV
+                </div>
             </div>
         </div>
     );

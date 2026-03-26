@@ -1,31 +1,11 @@
 "use client";
 import { Twitter } from 'lucide-react';
 import Image from 'next/image';
-import { loadStripe } from '@stripe/stripe-js';
-
-// STRIPE
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function Creator() {
 
     const handleCheckout = async () => {
-        try {
-            const response = await fetch('/api/checkout_sessions', {
-                method: 'POST',
-            });
-            const data = await response.json();
-            if (!response.ok) {
-                console.error("API Error:", data);
-                return;
-            }
-            if (data.url) {
-                window.open(data.url, '_blank');
-            } else {
-                console.error("No checkout URL found");
-            }
-        } catch (err) {
-            console.error(err);
-        }
+        // Stripe integration removed
     };
 
     return (
@@ -65,7 +45,7 @@ export default function Creator() {
                                         disabled
                                         className="px-6 py-3 bg-zinc-800 text-zinc-500 font-bold uppercase cursor-not-allowed flex items-center gap-2 transition-all opacity-50"
                                     >
-                                        現在停止中
+                                        お布団と融合中
                                     </button>
                                 </div>
 

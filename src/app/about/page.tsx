@@ -84,6 +84,12 @@ export default function About() {
                         </div>
                     </div>
                 </div>
+                {/* Original Site Link */}
+                <div className="mt-24 text-center text-zinc-500 font-bold tracking-widest text-sm">
+                    <a href="https://neetdi.vision/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
+                        NEET DIVISION ORIGINAL SITE
+                    </a>
+                </div>
             </div>
         </div>
     );
