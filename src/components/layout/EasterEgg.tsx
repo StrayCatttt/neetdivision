@@ -11,8 +11,9 @@ export default function EasterEgg() {
         let dotIndex = 0;
         let isBright = true;
         let progress = 91;
-        let nextProgressTime = Date.now() + 2000;
-        let delayFactor = 500; // Adjusted for a ~15-20s suspenseful build-up
+        
+        let nextProgressTime = Date.now() + 1000;
+        let delayFactor = 1000; 
 
         const originalTitle = document.title;
 
@@ -22,34 +23,39 @@ export default function EasterEgg() {
            
             console.clear();
             
-            // Header is always drawn to stay on top
+            // Header
             console.log("%c NEET DIVISION %c WELCOME TO SLUM DEV ", style1, style2);
            
-            // Progress logic
+            // Progress logic (Calculated for ~4 minutes total duration from 91 -> 100)
             if (!isCompleted && now >= nextProgressTime) {
                 progress++;
-                delayFactor *= 1.35; // Exponential slowdown (500 -> 675 -> 911 -> ... -> ~6000)
+                delayFactor *= 1.8; // 1000 * (1.8^9) sum ~= 240,000ms = 4 mins
                 nextProgressTime = now + delayFactor;
             }
 
-            // Sync Browser Title
+            // Sync Browser Title (Dynamic)
             if (isCompleted) {
-                document.title = "[ 🔒 SUBJECT_CAPTURED ]";
+                document.title = "🔒 SUBJECT_CAPTURED";
             } else if (progress >= 93) {
-                document.title = "[ 🔴 WATCHING YOU... ]";
+                document.title = "🔴 WATCHING YOU...";
             } else {
-                document.title = "[ ⚠️ SYSTEM ACCESSING... ]";
+                document.title = "⚠️ SYSTEM ACCESSING...";
             }
 
-            const baseColor = '#ff0000'; // Bright red
-            const dimColor = '#440000';  // Dark red
+            // Colors
+            const baseGrey = '#888888';
+            const dimGrey = '#444444';
+            const brightGrey = '#cccccc';
+
+            const brightRed = '#ff0000';
+            const dimRed = '#440000';
            
-            let displayColor = isBright ? baseColor : dimColor;
+            let displayColor = isBright ? (isCompleted ? brightRed : brightGrey) : (isCompleted ? dimRed : dimGrey);
             let progressText = isCompleted ? "Completed" : dots[dotIndex];
 
-            const msgHeader = `警告：覗くことは、覗かれることと同義だ。全貌を見せる予定はない。
-君を監視対象に追加した。せいぜい我々の管理下で大人しくしていることだ。
+            const msgTop = `警告：覗くことは、覗かれることと同義だ。全貌を見せる予定はない。\n君を監視対象に追加した。せいぜい我々の管理下で大人しくしていることだ。\n`;
 
+            const msgBody = `
 [SYSTEM_LOG: DB_RECORD_INSERTED]
 [TARGET_ID]：${targetID}
 [STATUS]：UNDER_SURVEILLANCE
@@ -58,20 +64,21 @@ export default function EasterEgg() {
 * [Packet_Analysis]：Real-time decryption enabled
 * [Keystroke_Log]：Synchronized (Input-delay: 0.02ms)
 * [DNS_Query]：Intercepted
-* [Data_Exfiltration]：Running in background... ${progress}% `;
+* [Data_Exfiltration]：Running in background... `;
 
             if (isCompleted) {
-                // Main text bright, "Completed" pulsating
                 console.log(
-                    `%c${msgHeader}%c${progressText}`,
-                    `color: ${baseColor}; font-family: monospace; font-weight: bold; font-size: 13px;`,
+                    `%c${msgTop}%c${msgBody}${progress}% %c${progressText}`,
+                    `color: ${brightRed}; font-family: monospace; font-weight: bold; font-size: 13px;`,
+                    `color: ${baseGrey}; font-family: monospace; font-weight: normal; font-size: 13px;`,
                     `color: ${displayColor}; font-family: monospace; font-weight: bold; font-size: 13px;`
                 );
             } else {
-                // Everything pulsating
                 console.log(
-                    `%c${msgHeader}${progressText}`,
-                    `color: ${displayColor}; font-family: monospace; font-weight: bold; font-size: 13px;`
+                    `%c${msgTop}%c${msgBody}%c${progress}% ${progressText}`,
+                    `color: ${brightRed}; font-family: monospace; font-weight: bold; font-size: 13px;`,
+                    `color: ${baseGrey}; font-family: monospace; font-weight: normal; font-size: 13px;`,
+                    `color: ${displayColor}; font-family: monospace; font-weight: normal; font-size: 13px;`
                 );
             }
            
@@ -88,12 +95,6 @@ export default function EasterEgg() {
 
     return (
         <div className="hidden">
-            {/* 
-        You found the source code? 
-        Unfortunately, there are no secrets here. 
-        Only caffeine dependencies and spaghetti code.
-        Go away.
-      */}
         </div>
     );
 }
