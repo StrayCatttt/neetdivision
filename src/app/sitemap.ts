@@ -1,33 +1,34 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+    const baseUrl = 'https://neet-division.com'
     return [
         {
-            url: 'https://neetdivision.vercel.app',
+            url: baseUrl,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 1,
         },
         {
-            url: 'https://neetdivision.vercel.app/about',
+            url: `${baseUrl}/about`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: 'https://neetdivision.vercel.app/recruit',
+            url: `${baseUrl}/recruit`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: 'https://neetdivision.vercel.app/achievements',
+            url: `${baseUrl}/achievements`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: 'https://neetdivision.vercel.app/creator',
+            url: `${baseUrl}/creator`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,

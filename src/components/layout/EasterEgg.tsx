@@ -20,6 +20,15 @@ export default function EasterEgg() {
         const origTitle = document.title;
         const pct = String.fromCharCode(37);
 
+        // Multiple detection methods
+        const checkDevTools = () => {
+            if (titleUnlocked) return;
+            // 1. Initial size gap (DevTools already open)
+            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+                titleUnlocked = true;
+            }
+        };
+
         const onKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j'))) {
                 titleUnlocked = true;
@@ -27,28 +36,31 @@ export default function EasterEgg() {
         };
         window.addEventListener('keydown', onKeyDown);
 
-        const initH = window.innerHeight;
-        const initW = window.innerWidth;
         const onResize = () => {
-            if (initH - window.innerHeight > 50 || initW - window.innerWidth > 50) {
+            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
                 titleUnlocked = true;
             }
         };
         window.addEventListener('resize', onResize);
+
+        // Run check immediately and then periodically
+        checkDevTools();
+        const checkInterval = setInterval(checkDevTools, 500);
 
         const mainInterval = setInterval(() => {
             const now = Date.now();
             const done = progress >= 100;
             
             console.clear();
-            // Two empty lines after "Console was cleared" (which is printed by console.clear())
-            // Note: Most browsers don't allow spacing *before* the first log after clear cleanly,
-            // so we log two newlines at the start of our first visible block.
             
-            console.log("\n\n");
+            // Push content away from right side to avoid overlapping links
+            const padLen = 60; // Padded width for log lines
+            const pad = (s: string) => s.padEnd(padLen, " ") + " ";
+
+            console.log(pad("\n\n"));
             console.log("%c NEET DIVISION %c WELCOME TO SLUM DEV ", s1, s2);
             
-            console.log("\n\n");
+            console.log(pad("\n\n"));
             console.log("%c警告：覗くことは、覗かれることと同義だ。全貌を見せる予定はない。\n君を監視対象に追加した。せいぜい我々の管理下で大人しくしていることだ。", redStyle);
 
             if (!done && now >= nextPT) {
@@ -74,7 +86,6 @@ export default function EasterEgg() {
                 port = String([443, 8080, 22, 3389, 9001, 4444][Math.floor(Math.random() * 6)]);
             }
 
-            // Body without horizontal dividers
             const bodyLines = [
                 "",
                 "[ SYSTEM_INTRUSION_LOG ]",
@@ -94,21 +105,18 @@ export default function EasterEgg() {
                 "",
                 "[ DATA_EXFILTRATION ]",
                 ""
-            ].join('\n');
+            ].map(l => pad(l)).join('\n');
             console.log(`%c${bodyLines}`, cyber);
 
-            // Progress Bar area
-            const bLen = 35;
+            const bLen = 25; // Smaller bar
             const filled = Math.round((progress / 100) * bLen);
             const bar = "█".repeat(filled) + "░".repeat(bLen - filled);
             
             if (done) {
-                // Static Red for 100% Completed
-                console.log(`%c  [${bar}] 100${pct} Completed`, redStyle);
+                console.log(`%c${pad(`  [${bar}] 100${pct} Completed`)}`, redStyle);
             } else {
-                // Dim for in progress
                 const dot = dots[di].padEnd(4);
-                console.log(`%c  [${bar}] ${progress}${pct} ${dot}`, dimStyle);
+                console.log(`%c${pad(`  [${bar}] ${progress}${pct} ${dot}`)}`, dimStyle);
             }
 
             if (!done) di = (di + 1) % dots.length;
@@ -117,6 +125,7 @@ export default function EasterEgg() {
         return () => {
             window.removeEventListener('keydown', onKeyDown);
             window.removeEventListener('resize', onResize);
+            clearInterval(checkInterval);
             clearInterval(mainInterval);
             document.title = origTitle;
         };
