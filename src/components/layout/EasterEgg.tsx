@@ -5,11 +5,9 @@ export default function EasterEgg() {
     useEffect(() => {
         const s1 = "background:#ccff00;color:#000;font-size:20px;font-weight:bold;padding:10px;";
         const s2 = "background:#000;color:#ccff00;font-size:20px;font-weight:bold;padding:10px;";
-        const red = "color:#ff0000;font-family:monospace;font-weight:bold;font-size:13px;";
+        const redStyle = "color:#ff0000;font-family:monospace;font-weight:bold;font-size:13px;";
         const cyber = "color:#00aa88;font-family:monospace;font-size:12px;";
         const dimStyle = "color:#888;font-family:monospace;font-size:12px;";
-        const greyStyle = "color:#666;font-family:monospace;font-size:11px;font-style:italic;";
-        const btnStyle = "background:#003322;color:#00ffcc;border:1px solid #00ffcc;padding:2px 8px;font-family:monospace;font-weight:bold;font-size:11px;border-radius:3px;";
 
         const tid = "NDV-" + Math.random().toString(36).substring(2, 8).toUpperCase();
         const hash = Array.from({length:32}, () => "0123456789abcdef"[Math.floor(Math.random()*16)]).join('');
@@ -20,9 +18,6 @@ export default function EasterEgg() {
         let titleUnlocked = false;
         const startTime = Date.now();
         const origTitle = document.title;
-        const W = 58;
-        const bdr = "═".repeat(W);
-        const ln = (s: string) => `║  ${s}${" ".repeat(Math.max(0, W - 2 - s.length))}║`;
         const pct = String.fromCharCode(37);
 
         const onKeyDown = (e: KeyboardEvent) => {
@@ -45,14 +40,16 @@ export default function EasterEgg() {
             const now = Date.now();
             const done = progress >= 100;
             
-            // Console management
             console.clear();
-            // Using a slightly delayed log or single log to avoid "Console was cleared" if possible, 
-            // but in Chrome it's hard. We'll just provide the grey version.
-            console.log("%cConsole was deleted", greyStyle);
+            // Two empty lines after "Console was cleared" (which is printed by console.clear())
+            // Note: Most browsers don't allow spacing *before* the first log after clear cleanly,
+            // so we log two newlines at the start of our first visible block.
             
+            console.log("\n\n");
             console.log("%c NEET DIVISION %c WELCOME TO SLUM DEV ", s1, s2);
-            console.log("%c警告：覗くことは、覗かれることと同義だ。全貌を見せる予定はない。\n君を監視対象に追加した。せいぜい我々の管理下で大人しくしていることだ。", red);
+            
+            console.log("\n\n");
+            console.log("%c警告：覗くことは、覗かれることと同義だ。全貌を見せる予定はない。\n君を監視対象に追加した。せいぜい我々の管理下で大人しくしていることだ。", redStyle);
 
             if (!done && now >= nextPT) {
                 progress++;
@@ -77,53 +74,42 @@ export default function EasterEgg() {
                 port = String([443, 8080, 22, 3389, 9001, 4444][Math.floor(Math.random() * 6)]);
             }
 
-            const tHead = [
-                `╔${bdr}╗`,
-                ln("[ SYSTEM_INTRUSION_LOG ]"),
-                `╠${bdr}╣`,
-                ln(""),
-                ln(`> SESSION    : ${hash}`),
-                ln(`> TARGET_ID  : ${tid}`),
-                ln(`> STATUS     : UNDER_SURVEILLANCE`),
-                ln(`> ELAPSED    : ${el}s`),
-                ln(""),
-                `╠${bdr}╣`,
-                ln("[ ACTIVE_THREADS ]"),
-                `╠${bdr}╣`,
-                ln(""),
-                ln(`◆ NET_TRACE      │ ${(ip+":"+port).padEnd(20)} │ TUNNELED`),
-                ln(`◆ PKT_ANALYSIS   │ ${"Decrypting TLS 1.3".padEnd(20)} │ LIVE`),
-                ln(`◆ KEYSTROKE_CAP  │ ${"Input-delay: 0.02ms".padEnd(20)} │ SYNCED`),
-                ln(`◆ DNS_INTERCEPT  │ ${"Queries rerouted".padEnd(20)} │ ACTIVE`),
-                ln(`◆ MEM_DUMP       │ ${"Heap snapshot ready".padEnd(20)} │ QUEUED`),
-                ln(""),
-                `╠${bdr}╣`,
-                ln("[ DATA_EXFILTRATION ]"),
-                `╠${bdr}╣`,
+            // Body without horizontal dividers
+            const bodyLines = [
+                "",
+                "[ SYSTEM_INTRUSION_LOG ]",
+                "",
+                `  > SESSION    : ${hash}`,
+                `  > TARGET_ID  : ${tid}`,
+                `  > STATUS     : UNDER_SURVEILLANCE`,
+                `  > ELAPSED    : ${el}s`,
+                "",
+                "[ ACTIVE_THREADS ]",
+                "",
+                `  ◆ NET_TRACE      │ ${(ip+":"+port).padEnd(20)} │ TUNNELED`,
+                `  ◆ PKT_ANALYSIS   │ ${"Decrypting TLS 1.3".padEnd(20)} │ LIVE`,
+                `  ◆ KEYSTROKE_CAP  │ ${"Input-delay: 0.02ms".padEnd(20)} │ SYNCED`,
+                `  ◆ DNS_INTERCEPT  │ ${"Queries rerouted".padEnd(20)} │ ACTIVE`,
+                `  ◆ MEM_DUMP       │ ${"Heap snapshot ready".padEnd(20)} │ QUEUED`,
+                "",
+                "[ DATA_EXFILTRATION ]",
+                ""
             ].join('\n');
-            console.log(`%c${tHead}`, cyber);
+            console.log(`%c${bodyLines}`, cyber);
 
-            const bLen = 28;
+            // Progress Bar area
+            const bLen = 35;
             const filled = Math.round((progress / 100) * bLen);
             const bar = "█".repeat(filled) + "░".repeat(bLen - filled);
             
             if (done) {
-                console.log(`%c${ln("")}\n${ln(`▓▓▓ [${bar}] 100${pct} Completed ▓▓▓`)}\n${ln("")}\n╚${bdr}╝`, red);
+                // Static Red for 100% Completed
+                console.log(`%c  [${bar}] 100${pct} Completed`, redStyle);
             } else {
+                // Dim for in progress
                 const dot = dots[di].padEnd(4);
-                console.log(`%c${ln("")}\n${ln(`▓▓▓ [${bar}] ${progress}${pct} ${dot}`)}\n${ln("")}\n╚${bdr}╝`, dimStyle);
+                console.log(`%c  [${bar}] ${progress}${pct} ${dot}`, dimStyle);
             }
-
-            // Links as stylish "Buttons"
-            console.log("\n%c[ ACCESS_TERMINALS ]", cyber);
-            console.log(
-                "%c MAIN_NODE %c  https://neet-division.com\n" +
-                "%c OPERATOR  %c  https://x.com/4EXP_\n" +
-                "%c RELAY_CH  %c  https://discord.gg/57VqX4DCD7",
-                btnStyle, cyber,
-                btnStyle, cyber,
-                btnStyle, cyber
-            );
 
             if (!done) di = (di + 1) % dots.length;
         }, 1000);
