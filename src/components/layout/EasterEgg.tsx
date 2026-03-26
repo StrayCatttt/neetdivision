@@ -5,7 +5,7 @@ export default function EasterEgg() {
     useEffect(() => {
         const s1 = "background:#ccff00;color:#000;font-size:20px;font-weight:bold;padding:10px;";
         const s2 = "background:#000;color:#ccff00;font-size:20px;font-weight:bold;padding:10px;";
-        const redStyle = "color:#ff0000;font-family:monospace;font-weight:bold;font-size:13px;";
+        const redStyle = "color:#ff0000;font-family:monospace;font-weight:bold;font-size:18px;";
         const cyber = "color:#00aa88;font-family:monospace;font-size:12px;";
         const dimStyle = "color:#888;font-family:monospace;font-size:12px;";
 

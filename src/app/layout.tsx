@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "NEET DIVISION",
     description: "WE ARE THE SLUMS. NEET DIVISION Official Website.",
     verification: {
-        google: "maOTMOwjA5BbAYPy_rkoO8LkXhiUedvHix47xvaC4v8",
+        google: "eNtYJ2YSpa4EWCJkSFHmbCX3P1OrDN4C5LERfHXcC_g",
     },
     other: {
         "google-adsense-account": "ca-pub-9269179060215740",
