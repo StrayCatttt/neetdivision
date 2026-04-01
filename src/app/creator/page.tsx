@@ -82,8 +82,7 @@ export default function Creator() {
                                     <h3 className="text-3xl font-bold mb-4 tracking-tighter">LTK Wallpaper</h3>
                                     <p className="text-gray-400 text-lg leading-relaxed mb-8">
                                         あの時の熱狂をもう一度。<br />
-                                        LTK Dash Ladderでパフォーマンスを最大限発揮するための<br />
-                                        必須アイテム。
+                                        LTK Dash Ladderでパフォーマンスを最大限発揮するための必須アイテム。
                                     </p>
                                     <div className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neon text-black font-black uppercase tracking-widest group-hover:bg-white transition-colors group/btn w-full md:w-fit">
                                         STEAM WORKSHOP
