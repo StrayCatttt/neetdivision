@@ -70,35 +70,50 @@ export default function Creator() {
                             <div className="h-px flex-1 bg-zinc-800"></div>
                         </div>
 
-                        <div className="bg-zinc-900 border border-zinc-800 overflow-hidden group hover:border-neon/50 transition-colors">
-                            <div className="flex flex-col lg:flex-row">
-                                <div className="lg:w-2/3 relative aspect-video overflow-hidden">
-                                    <Image
-                                        src="/images/ltk_wallpaper.png"
-                                        alt="LTK Wallpaper"
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                                </div>
-                                <div className="lg:w-1/3 p-8 md:p-12 flex flex-col justify-center">
-                                    <h3 className="text-3xl font-bold mb-4 tracking-tighter">LTK Wallpaper</h3>
-                                    <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                                        あの時の熱狂をもう一度。<br />
-                                        LTK Dash Ladderでパフォーマンスを最大限発揮するための必須アイテム。
-                                    </p>
-                                    <a
-                                        href="https://steamcommunity.com/sharedfiles/filedetails/?id=3697089836"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neon text-black font-black uppercase tracking-widest hover:bg-white transition-colors group/btn w-full md:w-fit"
-                                    >
-                                        STEAM WORKSHOP
-                                        <ExternalLink size={20} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                                    </a>
+                        <a 
+                            href="https://steamcommunity.com/sharedfiles/filedetails/?id=3697089836"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block bg-zinc-900 border border-zinc-800 overflow-hidden group hover:border-neon transition-all hover:shadow-[0_0_30px_rgba(204,255,0,0.1)] active:scale-[0.995] relative lg:h-[450px]"
+                        >
+                            {/* Background Image Area (Right-aligned, fades to left) */}
+                            <div className="hidden lg:block absolute inset-y-0 right-0 w-4/5 h-full pointer-events-none">
+                                <Image
+                                    src="/images/ltk_wallpaper.png"
+                                    alt="LTK Wallpaper"
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                    style={{
+                                        maskImage: 'linear-gradient(to right, transparent 0%, black 60%)',
+                                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 60%)'
+                                    }}
+                                />
+                            </div>
+                            
+                            {/* Mobile Image (Original simple view) */}
+                            <div className="lg:hidden w-full aspect-video relative">
+                                <Image
+                                    src="/images/ltk_wallpaper.png"
+                                    alt="LTK Wallpaper"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+
+                            {/* Content (Left-aligned) */}
+                            <div className="relative z-10 w-full lg:w-1/2 h-full p-8 md:p-12 flex flex-col justify-center">
+                                <h3 className="text-3xl font-bold mb-4 tracking-tighter">LTK Wallpaper</h3>
+                                <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-[40ch]">
+                                    あの時の熱狂をもう一度。<br />
+                                    LTK Dash Ladderでパフォーマンスを最大限発揮するための<br />
+                                    必須アイテム。
+                                </p>
+                                <div className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-neon text-black font-black uppercase tracking-widest group-hover:bg-white transition-colors group/btn w-full md:w-fit">
+                                    STEAM WORKSHOP
+                                    <ExternalLink size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
