@@ -14,8 +14,24 @@ const futuraLight = localFont({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://neetdivision.vercel.app'),
     title: "NEET DIVISION",
     description: "WE ARE THE SLUMS. NEET DIVISION Official Website.",
+    keywords: [
+        "k4sen", "カセガク", "学院", "the k4sen", "かせん", "カセン", "shaka", "釈迦", "葛葉", "kuzuha", 
+        "lol", "League of Legends", "リーグ・オブ・レジェンド", "配信者", "ぶいすぽ", "vspo", "にじさんじ", 
+        "nijisanji", "ローレン・イロアス", "アルス・アルマル", "LTK", "LTKDL", "スラム街", "discord", "鯖", 
+        "サーバー", "ニーディビ", "入り方", "募集", "昏昏アリア", "ネオポルテ", "天帝フォルテ", "夜絆ニウ", 
+        "vtuber", "streamer", "鷹宮リオン", "らいじん", "らいさま", "たかやスペシャル", "zerost", "しゃるる", 
+        "Eugeo", "TFT", "橘ひなの", "花芽すみれ", "一ノ瀬うるは", "白波らむね", "龍巻ちせ", "銀城サイネ", 
+        "胡桃のあ", "小森めと", "猫汰つな", "如月れん", "紫宮るな", "甘結もか", "蝶屋はなび", "千燈ゆうひ", 
+        "紡木こかげ", "小雀とと", "花芽なずな", "兎咲ミミ", "藍沢エマ", "英リサ", "夢野あかり", "八雲べに", 
+        "神成きゅぴ", "空澄セナ", "夜乃くろむ", "nqrse", "なるせ", "おぼ", "まざー", "トナカイト", "ツルギ", 
+        "valorant", "vct", "ljl", "白那しずく"
+    ],
+    alternates: {
+        canonical: '/',
+    },
     verification: {
         google: "eNtYJ2YSpa4EWCJkSFHmbCX3P1OrDN4C5LERfHXcC_g",
     },
