@@ -10,7 +10,7 @@ const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
 export default function Achievements() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [activeIndex, setActiveIndex] = useState(0);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number>(0);
   const jupiterContainerRef = useRef<HTMLDivElement>(null);
   const jupiterRef = useRef<HTMLDivElement>(null);
   
@@ -280,7 +280,7 @@ export default function Achievements() {
       `}</style>
 
       {/* Fixed Background Title */}
-      <h1 className="absolute top-[120px] right-12 text-7xl md:text-9xl font-heading font-bold text-white opacity-30 tracking-[0.05em] text-right pointer-events-none z-0 italic">
+      <h1 className="absolute top-[120px] right-12 text-7xl md:text-9xl font-heading font-bold text-white opacity-30 tracking-[0.05em] text-right pointer-events-none z-10 italic">
         HISTORY
       </h1>
 
@@ -298,7 +298,7 @@ export default function Achievements() {
         {/* Rotating Jupiter */}
         <div ref={jupiterRef} className="absolute inset-0 will-change-transform opacity-90" style={{ filter: 'contrast(1.2)' }}>
           <Image 
-            src="/images/Jupiter.png" 
+            src="/images/Jupiter.webp" 
             alt="Jupiter" 
             fill 
             className="object-contain mix-blend-screen"
