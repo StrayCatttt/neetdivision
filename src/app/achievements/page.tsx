@@ -43,7 +43,8 @@ export default function Achievements() {
     introStartAngle: 2 * anglePerItem,
     lastAngle: 2 * anglePerItem,
     jupiterAngle: 0,
-    jupiterVelocity: 0
+    jupiterVelocity: 0,
+    lastTime: 0
   });
 
   useEffect(() => {
@@ -144,8 +145,14 @@ export default function Achievements() {
       // 摩擦でゆっくり止まる
       s.jupiterVelocity *= 0.98;
       
-      // 常に超低速で時計回りに回転させるベース速度(0.02)を加算
-      s.jupiterAngle += s.jupiterVelocity + 0.02;
+      // フレームレートに依存せず、正確に「5分(300秒)で1回転」させるための時間差分計算
+      if (!s.lastTime) s.lastTime = time;
+      const deltaTime = time - s.lastTime;
+      s.lastTime = time;
+
+      // 360度 / 300,000ms = 0.0012度/ms
+      const baseRotation = deltaTime * 0.0012;
+      s.jupiterAngle += s.jupiterVelocity + baseRotation;
 
       if (jupiterContainerRef.current && jupiterRef.current) {
         // コンテナ（影含む）の位置・サイズを更新
