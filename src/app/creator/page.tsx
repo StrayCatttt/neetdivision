@@ -1,6 +1,7 @@
 "use client";
 import { Twitter, Monitor, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import Script from 'next/script';
 
 export default function Creator() {
 
@@ -18,7 +19,7 @@ export default function Creator() {
                 <div className="space-y-12">
                     {/* Developer Section */}
                     <div className="bg-zinc-900 border border-zinc-800 p-10 md:p-16 relative overflow-hidden group">
-                        <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
+                        <div className="flex flex-col xl:flex-row items-center xl:items-start gap-12 relative z-10">
                             <div className="w-48 h-48 relative rounded-full border-4 border-neon overflow-hidden shrink-0 shadow-[0_0_30px_rgba(204,255,0,0.3)]">
                                 <Image
                                     src="/images/creator_icon.webp"
@@ -55,6 +56,12 @@ export default function Creator() {
                                         </a>
                                     </span>
                                 </div>
+                            </div>
+                            
+                            {/* Twitter Embed */}
+                            <div className="w-full xl:w-[350px] flex-shrink-0 mt-8 xl:mt-0 overflow-hidden rounded-xl border border-zinc-800">
+                                <a className="twitter-timeline" data-width="350" data-height="400" data-theme="dark" href="https://twitter.com/4EXP_?ref_src=twsrc%5Etfw">Tweets by 4EXP_</a>
+                                <Script async src="https://platform.twitter.com/widgets.js" strategy="lazyOnload" />
                             </div>
                         </div>
                     </div>
