@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Twitter, Youtube, Twitch, ChevronDown } from "lucide-react";
+import { Twitter, Youtube, Twitch, Instagram, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -366,6 +366,9 @@ export default function About() {
                             </a>
                             <a href="https://www.twitch.tv/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
                                 <Twitch size={28} />
+                            </a>
+                            <a href="https://www.instagram.com/k4sen.denei/?hl=ja" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
+                                <Instagram size={28} />
                             </a>
                         </div>
                     </div>
