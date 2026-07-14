@@ -277,7 +277,7 @@ export default function About() {
                         <p className="stagger-child-sm" style={{ transitionDelay: '0s' }}>
                             NEET DIVISIONは、k4senリスナーによって結成された、世界で最も「働きたくない（けどLoLはしたい）」精鋭たちの集まりです。
                         </p>
-                        <p className="stagger-child-sm bg-zinc-900/40 backdrop-blur-md p-8 rounded-lg" style={{ transitionDelay: '0.15s' }}>
+                        <p className="stagger-child-sm bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl p-8 rounded-xl" style={{ transitionDelay: '0.15s' }}>
                             我々はプロではありません。しかし、ニートとしての誇りと時間だけは無限にあります。 サモナーズリフトにおいて、我々の右に出る無職はいません。
                         </p>
                         <p className="stagger-child-sm" style={{ transitionDelay: '0.3s' }}>
@@ -298,15 +298,15 @@ export default function About() {
 
                 <h2 data-scroll-reveal="up" className="text-5xl font-heading mb-12 tracking-tight text-center text-neon">ACTIVITY</h2>
                 <div data-scroll-reveal="stagger-parent" className="grid md:grid-cols-3 gap-8 mb-32">
-                    <div className="stagger-child-lg bg-zinc-900/40 backdrop-blur-md p-10 rounded-lg" style={{ transitionDelay: '0s' }}>
+                    <div className="stagger-child-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl p-10 rounded-xl" style={{ transitionDelay: '0s' }}>
                         <h3 className="text-2xl font-bold mb-4 text-neon tracking-wider">RANKED FLEX</h3>
                         <p className="text-white leading-relaxed">IronからGrandmasterまで、階級社会を無視したカオスなチームランク。24時間体制でフルパ募集が行われている。</p>
                     </div>
-                    <div className="stagger-child-lg bg-zinc-900/40 backdrop-blur-md p-10 rounded-lg" style={{ transitionDelay: '0.2s' }}>
+                    <div className="stagger-child-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl p-10 rounded-xl" style={{ transitionDelay: '0.2s' }}>
                         <h3 className="text-2xl font-bold mb-4 text-neon tracking-wider">SCRIM</h3>
                         <p className="text-white leading-relaxed">配信者のカスタムゲームへの緊急出動。スクリム待機は日常茶飯事、人事部長の命令には逆らえない。</p>
                     </div>
-                    <div className="stagger-child-lg bg-zinc-900/40 backdrop-blur-md p-10 rounded-lg" style={{ transitionDelay: '0.4s' }}>
+                    <div className="stagger-child-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl p-10 rounded-xl" style={{ transitionDelay: '0.4s' }}>
                         <h3 className="text-2xl font-bold mb-4 text-neon tracking-wider">SUB EVENTS</h3>
                         <p className="text-white leading-relaxed">時にはイベントにチームとして優先的に呼ばれる。その時まで爪を研ぎ続ける。</p>
                     </div>
