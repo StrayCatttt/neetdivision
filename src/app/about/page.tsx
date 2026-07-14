@@ -352,7 +352,7 @@ export default function About() {
                         <p className="text-white text-lg md:text-xl leading-relaxed mb-8">
                             我らがボスであり、全てのニートの希望の星。
                             彼の配信通知が我々の起床アラームであり、彼の言葉が我々の法律である。
-                            NEET DIVISIONは、彼のために存在し、彼と共に歩む（コメント欄で）。
+                            NEET DIVISIONは、彼のために存在し、彼と共に歩む。
                         </p>
                         <a href="https://note.com/another_crown/n/n53bfbf0f56c8" target="_blank" rel="noopener noreferrer" className="text-neon font-bold underline hover:text-white transition-colors mb-8 inline-block">
                             k4senについて知る
