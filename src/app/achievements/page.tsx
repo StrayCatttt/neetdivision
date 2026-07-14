@@ -144,7 +144,8 @@ export default function Achievements() {
       // 摩擦でゆっくり止まる
       s.jupiterVelocity *= 0.98;
       
-      s.jupiterAngle += s.jupiterVelocity;
+      // 常に超低速で時計回りに回転させるベース速度(0.02)を加算
+      s.jupiterAngle += s.jupiterVelocity + 0.02;
 
       if (jupiterContainerRef.current && jupiterRef.current) {
         // コンテナ（影含む）の位置・サイズを更新
