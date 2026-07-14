@@ -358,16 +358,16 @@ export default function About() {
                             k4senについて知る
                         </a>
                         <div className="flex gap-6 justify-center">
-                            <a href="https://x.com/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
+                            <a href="https://x.com/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Twitter size={28} />
                             </a>
-                            <a href="https://www.youtube.com/@zzxk4sen" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
+                            <a href="https://www.youtube.com/@zzxk4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Youtube size={28} />
                             </a>
-                            <a href="https://www.twitch.tv/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
+                            <a href="https://www.twitch.tv/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Twitch size={28} />
                             </a>
-                            <a href="https://www.instagram.com/k4sen.denei/?hl=ja" target="_blank" rel="noopener noreferrer" className="p-4 bg-white text-black border border-white rounded-full hover:bg-black hover:text-white transition-all">
+                            <a href="https://www.instagram.com/k4sen.denei/?hl=ja" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Instagram size={28} />
                             </a>
                         </div>
