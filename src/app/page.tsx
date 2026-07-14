@@ -190,10 +190,10 @@ export default function Home() {
           <p className="text-xl tracking-[0.25em] mb-12 text-gray-400 font-futura-bold">WE ARE THE SLUMS</p>
 
           <div className="flex flex-wrap gap-6 justify-center">
-            <Link href="/about" className="w-64 px-10 py-4 border-2 border-white text-white font-bold uppercase hover:bg-neon hover:border-neon hover:text-black transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+            <Link href="/about" className="w-64 px-10 py-4 border-2 border-white text-white font-bold uppercase hover:bg-neon hover:border-neon hover:text-black transition-all duration-300 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center">
               About Us
             </Link>
-            <Link href="/recruit" className="w-64 px-10 py-4 border-2 border-white text-white font-bold uppercase hover:bg-neon hover:border-neon hover:text-black transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+            <Link href="/recruit" className="w-64 px-10 py-4 border-2 border-white text-white font-bold uppercase hover:bg-neon hover:border-neon hover:text-black transition-all duration-300 transform hover:-translate-y-1 active:scale-95 flex items-center justify-center">
               Join Us
             </Link>
           </div>

@@ -25,12 +25,17 @@ const config: Config = {
             },
             animation: {
                 'glitch': 'glitch 1s linear infinite',
+                'slide-down-fade': 'slideDownFade 0.6s cubic-bezier(0.0, 0.0, 0.2, 1) both',
             },
             keyframes: {
                 glitch: {
                     '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
                     '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
                     '62%': { transform: 'translate(0,0) skew(5deg)' },
+                },
+                slideDownFade: {
+                    '0%': { transform: 'translateY(-30px)', opacity: '0' },
+                    '100%': { transform: 'translateY(0)', opacity: '1' },
                 }
             }
         },

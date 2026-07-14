@@ -32,7 +32,7 @@ export default function Header() {
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
             <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-                <Link href="/" className="text-2xl font-bold text-white tracking-tighter flex gap-2">
+                <Link href="/" className="text-2xl font-bold text-white tracking-tighter flex gap-2 active:scale-95 transition-transform origin-left">
                     <span className="font-futura-bold tracking-[-0.025em] drop-shadow-[0_0_8px_rgba(204,255,0,0.5)]">NEET</span> <span className="font-futura-light text-neon">DIVISION</span>
                 </Link>
 
@@ -48,7 +48,7 @@ export default function Header() {
                             <Link
                                 href={item.path}
                                 className={cn(
-                                    "text-sm font-bold transition-all uppercase hover:text-neon hover:underline decoration-neon decoration-2 underline-offset-4",
+                                    "text-sm font-bold transition-all uppercase hover:text-neon hover:underline decoration-neon decoration-2 underline-offset-4 active:scale-90 inline-block",
                                     pathname === item.path ? "text-neon underline" : "text-gray-300"
                                 )}
                             >

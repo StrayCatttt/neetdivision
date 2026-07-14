@@ -354,20 +354,20 @@ export default function About() {
                             彼の配信通知が我々の起床アラームであり、彼の言葉が我々の法律である。
                             NEET DIVISIONは、彼のために存在し、彼と共に歩む。
                         </p>
-                        <a href="https://note.com/another_crown/n/n53bfbf0f56c8" target="_blank" rel="noopener noreferrer" className="text-neon font-bold underline hover:text-white transition-colors mb-8 inline-block">
+                        <a href="https://note.com/another_crown/n/n53bfbf0f56c8" target="_blank" rel="noopener noreferrer" className="text-neon font-bold underline hover:text-white transition-colors mb-8 inline-block active:scale-95">
                             k4senについて知る
                         </a>
                         <div className="flex gap-6 justify-center">
-                            <a href="https://x.com/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
+                            <a href="https://x.com/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 active:scale-90 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Twitter size={28} />
                             </a>
-                            <a href="https://www.youtube.com/@zzxk4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
+                            <a href="https://www.youtube.com/@zzxk4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 active:scale-90 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Youtube size={28} />
                             </a>
-                            <a href="https://www.twitch.tv/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
+                            <a href="https://www.twitch.tv/k4sen" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 active:scale-90 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Twitch size={28} />
                             </a>
-                            <a href="https://www.instagram.com/k4sen.denei/?hl=ja" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
+                            <a href="https://www.instagram.com/k4sen.denei/?hl=ja" target="_blank" rel="noopener noreferrer" className="p-4 rounded-full backdrop-blur-md bg-white/95 border border-white/60 text-black hover:bg-white/50 hover:text-white hover:scale-110 active:scale-90 transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.4)]">
                                 <Instagram size={28} />
                             </a>
                         </div>

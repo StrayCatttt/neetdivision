@@ -298,6 +298,9 @@ export default function Achievements() {
           .ach-inner {
             transition: transform 0.1s linear;
           }
+          .ach-card:active .ach-inner {
+            transform: scale(0.95) !important;
+          }
         `}</style>
 
         {/* Fixed Background Title */}
