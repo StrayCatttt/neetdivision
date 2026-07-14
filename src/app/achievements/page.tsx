@@ -136,12 +136,12 @@ export default function Achievements() {
 
       if (!s.isAnimatingIntro) {
         // リングの回転方向（CSSのrotate）と一致させるためにマイナスを使用
-        // 回転速度をもっとはっきり遅くするため、0.0025 -> 0.0005 に極限まで減らす
-        s.jupiterVelocity -= ringSpeed * 0.0005;
+        // スクロール時の回転速度は元の勢いに戻す
+        s.jupiterVelocity -= ringSpeed * 0.005;
       }
       
-      // 最高速度を制限（最高速度も 0.075 -> 0.02 に劇的に下げる）
-      s.jupiterVelocity = Math.max(-0.02, Math.min(0.02, s.jupiterVelocity));
+      // 最高速度を制限（スクロール時の最高速度も元に戻す）
+      s.jupiterVelocity = Math.max(-0.15, Math.min(0.15, s.jupiterVelocity));
       
       // 摩擦でゆっくり止まる（0.98 -> 0.992 に変更して余韻を長くする）
       s.jupiterVelocity *= 0.992;
