@@ -136,12 +136,12 @@ export default function Achievements() {
 
       if (!s.isAnimatingIntro) {
         // リングの回転方向（CSSのrotate）と一致させるためにマイナスを使用
-        // 回転速度を今の半分にするため、係数を 0.005 から 0.0025 に半減
-        s.jupiterVelocity -= ringSpeed * 0.0025;
+        // 回転速度をもっとはっきり遅くするため、0.0025 -> 0.0005 に極限まで減らす
+        s.jupiterVelocity -= ringSpeed * 0.0005;
       }
       
-      // 最高速度を制限（ゆっくりな速度）※最高速度も半分に
-      s.jupiterVelocity = Math.max(-0.075, Math.min(0.075, s.jupiterVelocity));
+      // 最高速度を制限（最高速度も 0.075 -> 0.02 に劇的に下げる）
+      s.jupiterVelocity = Math.max(-0.02, Math.min(0.02, s.jupiterVelocity));
       
       // 摩擦でゆっくり止まる（0.98 -> 0.992 に変更して余韻を長くする）
       s.jupiterVelocity *= 0.992;
@@ -305,7 +305,7 @@ export default function Achievements() {
         }}
       >
         {/* Rotating Jupiter */}
-        <div ref={jupiterRef} className="absolute inset-0 will-change-transform opacity-90" style={{ filter: 'contrast(1.2)' }}>
+        <div ref={jupiterRef} className="absolute inset-0 will-change-transform opacity-90">
           <Image 
             src="/images/Jupiter.webp" 
             alt="Jupiter" 
