@@ -150,8 +150,8 @@ export default function Achievements() {
       const deltaTime = time - s.lastTime;
       s.lastTime = time;
 
-      // 360度 / 300,000ms = 0.0012度/ms
-      const baseRotation = deltaTime * 0.0012;
+      // 360度 / 600,000ms(10分) = 0.0006度/ms
+      const baseRotation = deltaTime * 0.0006;
       s.jupiterAngle += s.jupiterVelocity + baseRotation;
 
       if (jupiterContainerRef.current && jupiterRef.current) {
