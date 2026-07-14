@@ -74,7 +74,7 @@ export default function Creator() {
                             href="https://steamcommunity.com/sharedfiles/filedetails/?id=3697750315"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block bg-zinc-900 border border-zinc-800 overflow-hidden group hover:border-neon transition-all hover:shadow-[0_0_30px_rgba(204,255,0,0.1)] active:scale-[0.995]"
+                            className="block bg-zinc-900 border border-zinc-800 overflow-hidden group hover:border-neon transition-all hover:shadow-[0_0_30px_rgba(204,255,0,0.1)] active:scale-95"
                         >
                             <div className="grid grid-cols-1 lg:grid-cols-2">
                                 {/* Content Area (Left) */}
