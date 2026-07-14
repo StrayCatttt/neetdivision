@@ -41,7 +41,7 @@ export default function Recruit() {
                             href="https://discord.gg/57VqX4DCD7"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-8 py-3 bg-neon text-black font-bold uppercase transition-all hover:bg-white hover:scale-105"
+                            className="inline-block px-8 py-3 bg-neon text-black font-bold uppercase transition-all hover:bg-white hover:scale-105 active:scale-95"
                             style={{ backgroundColor: '#ccff00', color: '#000' }}
                         >
                             Discordサーバーに参加

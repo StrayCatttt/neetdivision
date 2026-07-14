@@ -37,7 +37,7 @@ export default function Creator() {
                                 </p>
                                 <div className="flex flex-col gap-4 items-start">
                                     <div className="flex gap-6 justify-center md:justify-start items-center">
-                                        <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon transition-all">
+                                        <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon active:scale-90 transition-all">
                                             <Twitter size={28} />
                                         </a>
 
