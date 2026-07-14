@@ -136,22 +136,23 @@ export default function Achievements() {
 
       if (!s.isAnimatingIntro) {
         // リングの回転方向（CSSのrotate）と一致させるためにマイナスを使用
-        s.jupiterVelocity -= ringSpeed * 0.005;
+        // 回転速度を今の半分にするため、係数を 0.005 から 0.0025 に半減
+        s.jupiterVelocity -= ringSpeed * 0.0025;
       }
       
-      // 最高速度を制限（ゆっくりな速度）
-      s.jupiterVelocity = Math.max(-0.15, Math.min(0.15, s.jupiterVelocity));
+      // 最高速度を制限（ゆっくりな速度）※最高速度も半分に
+      s.jupiterVelocity = Math.max(-0.075, Math.min(0.075, s.jupiterVelocity));
       
-      // 摩擦でゆっくり止まる
-      s.jupiterVelocity *= 0.98;
+      // 摩擦でゆっくり止まる（0.98 -> 0.992 に変更して余韻を長くする）
+      s.jupiterVelocity *= 0.992;
       
       // フレームレートに依存せず、正確に「5分(300秒)で1回転」させるための時間差分計算
       if (!s.lastTime) s.lastTime = time;
       const deltaTime = time - s.lastTime;
       s.lastTime = time;
 
-      // 360度 / 600,000ms(10分) = 0.0006度/ms
-      const baseRotation = deltaTime * 0.0006;
+      // 360度 / 1,200,000ms(20分) = 0.0003度/ms (ベース速度も半分に)
+      const baseRotation = deltaTime * 0.0003;
       s.jupiterAngle += s.jupiterVelocity + baseRotation;
 
       if (jupiterContainerRef.current && jupiterRef.current) {
