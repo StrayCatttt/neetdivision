@@ -10,6 +10,7 @@ const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
 export default function Achievements() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isJupiterLoaded, setIsJupiterLoaded] = useState(false);
   const requestRef = useRef<number>(0);
   const jupiterContainerRef = useRef<HTMLDivElement>(null);
   const jupiterRef = useRef<HTMLDivElement>(null);
@@ -52,15 +53,18 @@ export default function Achievements() {
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Intro trigger - Start immediately
-    state.current.introStartTime = performance.now();
-    state.current.targetAngle = 0; // Newest (index 0)
-    state.current.introStartAngle = state.current.currentAngle;
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (isJupiterLoaded && windowSize.width > 0 && state.current.introStartTime === 0) {
+      state.current.introStartTime = performance.now();
+      state.current.targetAngle = 0; // Newest (index 0)
+      state.current.introStartAngle = state.current.currentAngle;
+    }
+  }, [isJupiterLoaded, windowSize.width]);
 
   useEffect(() => {
     if (windowSize.width === 0) return;
@@ -258,74 +262,82 @@ export default function Achievements() {
   };
 
   return (
-    <div className="h-screen w-full bg-black overflow-hidden relative text-white select-none">
-      <style>{`
-        .card-bg {
-          background: rgba(18, 18, 18, 0.9);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          backdrop-filter: blur(8px);
-          transition: all 0.3s ease;
-        }
-        .ach-card:hover .card-bg {
-          border-color: #CCFF00;
-          box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
-        }
-        .ach-img {
-          transition: transform 0.7s ease;
-        }
-        .link-btn {
-          border-bottom: 1px solid rgba(255,255,255,0.3);
-          transition: all 0.3s ease;
-        }
-        .ach-card:hover .link-btn {
-          border-bottom-color: #CCFF00;
-        }
-        .ach-card:hover .link-arrow {
-          transform: translateX(4px);
-        }
-        .ach-inner {
-          transition: transform 0.1s linear;
-        }
-      `}</style>
+    <>
+      {/* Loading Screen */}
+      <div className={`fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-1000 pointer-events-none ${isJupiterLoaded ? "opacity-0" : "opacity-100"}`}>
+        <div className="text-white font-futura-bold tracking-[0.2em] animate-pulse">
+          INITIALIZING...
+        </div>
+      </div>
 
-      {/* Fixed Background Title */}
-      <h1 className="absolute top-[120px] right-12 text-7xl md:text-9xl font-heading font-bold text-white opacity-30 tracking-[0.05em] text-right pointer-events-none z-10 italic">
-        HISTORY
-      </h1>
+      <div className="h-screen w-full bg-black overflow-hidden relative text-white select-none">
+        <style>{`
+          .card-bg {
+            background: rgba(18, 18, 18, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+          }
+          .ach-card:hover .card-bg {
+            border-color: #CCFF00;
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+          }
+          .ach-img {
+            transition: transform 0.7s ease;
+          }
+          .link-btn {
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+          }
+          .ach-card:hover .link-btn {
+            border-bottom-color: #CCFF00;
+          }
+          .ach-card:hover .link-arrow {
+            transform: translateX(4px);
+          }
+          .ach-inner {
+            transition: transform 0.1s linear;
+          }
+        `}</style>
 
-      {/* Jupiter Background */}
-      <div 
-        ref={jupiterContainerRef}
-        className="absolute top-1/2 z-0 pointer-events-none"
-        style={{
-           left: `${originX}px`,
-           transform: `translate(-50%, -50%)`,
-           width: `${ringR * 2}px`,
-           height: `${ringR * 2}px`,
-        }}
-      >
-        {/* Rotating Jupiter */}
-        <div ref={jupiterRef} className="absolute inset-0 will-change-transform opacity-90">
-          <Image 
-            src="/images/Jupiter.webp" 
-            alt="Jupiter" 
-            fill 
-            className="object-contain mix-blend-screen"
-            priority
-            unoptimized={true}
-            quality={100}
+        {/* Fixed Background Title */}
+        <h1 className="absolute top-[120px] right-12 text-7xl md:text-9xl font-heading font-bold text-white opacity-30 tracking-[0.05em] text-right pointer-events-none z-10 italic">
+          HISTORY
+        </h1>
+
+        {/* Jupiter Background */}
+        <div 
+          ref={jupiterContainerRef}
+          className="absolute top-1/2 z-0 pointer-events-none"
+          style={{
+             left: `${originX}px`,
+             transform: `translate(-50%, -50%)`,
+             width: `${ringR * 2}px`,
+             height: `${ringR * 2}px`,
+          }}
+        >
+          {/* Rotating Jupiter */}
+          <div ref={jupiterRef} className="absolute inset-0 will-change-transform opacity-90">
+            <Image 
+              src="/images/Jupiter.webp" 
+              alt="Jupiter" 
+              fill 
+              className="object-contain mix-blend-screen"
+              priority
+              unoptimized={true}
+              quality={100}
+              onLoad={() => setIsJupiterLoaded(true)}
+            />
+          </div>
+          
+          {/* Static Planetary Shadow */}
+          <div 
+            className="absolute inset-0 rounded-full z-10"
+            style={{
+              background: 'radial-gradient(ellipse 100% 85% at 0% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 65%, transparent 78%, transparent 100%)'
+            }}
           />
         </div>
-        
-        {/* Static Planetary Shadow */}
-        <div 
-          className="absolute inset-0 rounded-full z-10"
-          style={{
-            // カーブをさらに急にするため、縦の引き伸ばしを 105% から 20% 縮小して 85% に設定
-            background: 'radial-gradient(ellipse 100% 85% at 0% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.8) 65%, transparent 78%, transparent 100%)'
-          }}
-        />
-      </div>
 
       {/* Ring Container Center */}
       <div className="absolute top-1/2 left-0 z-20 w-0 h-0" style={{ 
@@ -452,5 +464,6 @@ export default function Achievements() {
         })}
       </div>
     </div>
+    </>
   );
 }
