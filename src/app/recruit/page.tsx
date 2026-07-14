@@ -1,13 +1,53 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+function ScrambleTitle() {
+    const text = "JOIN US";
+    const [displayText, setDisplayText] = useState(text);
+
+    useEffect(() => {
+        let iteration = 0;
+        let interval: NodeJS.Timeout;
+
+        interval = setInterval(() => {
+            setDisplayText(
+                text.split('')
+                    .map((char, index) => {
+                        if (index < iteration) return text[index];
+                        if (char === ' ') return ' ';
+                        return CHARS[Math.floor(Math.random() * CHARS.length)];
+                    })
+                    .join('')
+            );
+
+            if (iteration >= text.length) {
+                clearInterval(interval);
+            }
+
+            iteration += 1 / 4;
+        }, 30);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const joinPart = displayText.slice(0, 4);
+    const spacePart = displayText.slice(4, 5);
+    const usPart = displayText.slice(5);
+
+    return (
+        <h1 className="text-6xl md:text-8xl font-heading font-bold mb-12 text-center italic uppercase">
+            {joinPart}{spacePart}<span className="text-neon">{usPart}</span>
+        </h1>
+    );
+}
 
 export default function Recruit() {
     return (
         <div className="min-h-screen pt-32 pb-24 px-4 md:px-12 bg-black text-white">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-6xl md:text-8xl font-heading font-bold mb-12 text-center italic">
-                    JOIN <span className="text-neon">US</span>
-                </h1>
+                <ScrambleTitle />
 
                 <div className="space-y-8 mb-16">
                     <div className="bg-zinc-900 border-2 border-red-600 p-8 rounded-sm">

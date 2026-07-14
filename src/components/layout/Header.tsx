@@ -1,13 +1,25 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+        if (document.readyState === 'complete') {
+            setIsLoaded(true);
+        } else {
+            const handleLoad = () => setIsLoaded(true);
+            window.addEventListener('load', handleLoad);
+            return () => window.removeEventListener('load', handleLoad);
+        }
+    }, []);
 
     const navItems = [
         { name: 'HOME', path: '/' },
@@ -26,17 +38,23 @@ export default function Header() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex gap-8">
-                    {navItems.map((item) => (
-                        <Link
+                    {navItems.map((item, index) => (
+                        <motion.div
                             key={item.path}
-                            href={item.path}
-                            className={cn(
-                                "text-sm font-bold transition-all uppercase hover:text-neon hover:underline decoration-neon decoration-2 underline-offset-4",
-                                pathname === item.path ? "text-neon underline" : "text-gray-300"
-                            )}
+                            initial={{ y: -30, opacity: 0 }}
+                            animate={isLoaded ? { y: 0, opacity: 1 } : { y: -30, opacity: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
                         >
-                            {item.name}
-                        </Link>
+                            <Link
+                                href={item.path}
+                                className={cn(
+                                    "text-sm font-bold transition-all uppercase hover:text-neon hover:underline decoration-neon decoration-2 underline-offset-4",
+                                    pathname === item.path ? "text-neon underline" : "text-gray-300"
+                                )}
+                            >
+                                {item.name}
+                            </Link>
+                        </motion.div>
                     ))}
                 </nav>
 
