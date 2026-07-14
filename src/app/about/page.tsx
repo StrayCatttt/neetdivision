@@ -285,12 +285,13 @@ export default function About() {
                         </p>
                     </div>
                     <div className="relative group stagger-child-sm" style={{ transitionDelay: '0.45s' }}>
-                        <div className="relative overflow-hidden aspect-[4/3]">
+                        <div className="relative overflow-hidden rounded-2xl">
                             <Image
                                 src="/images/neet_division_logo.webp"
                                 alt="NEET DIVISION INFO"
-                                fill
-                                className="object-contain"
+                                width={1200}
+                                height={675}
+                                className="w-full h-auto rounded-2xl"
                             />
                         </div>
                     </div>
