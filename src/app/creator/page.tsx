@@ -111,6 +111,12 @@ export default function Creator() {
                         </a>
                     </div>
                 </div>
+
+                {/* Footer Disclaimer */}
+                <div className="mt-24 text-center text-xs text-zinc-600 font-body space-y-1">
+                    <p>&copy; 2026 Stray. All Rights Reserved.</p>
+                    <p>※当サイトは非公式のファンサイトであり、実在の企業・団体・ご本人様とは一切関係ありません。</p>
+                </div>
             </div>
         </div>
     );
