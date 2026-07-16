@@ -67,11 +67,17 @@ export default function Header() {
             {/* Mobile Nav */}
             <div className={cn("md:hidden absolute top-full left-0 w-full bg-black border-b border-neon transition-all duration-300 overflow-hidden", isOpen ? "max-h-96" : "max-h-0")}>
                 <nav className="flex flex-col p-6 gap-4">
-                    {navItems.map((item) => (
+                    {navItems.map((item, index) => (
                         <Link
                             key={item.path}
                             href={item.path}
-                            className="text-xl font-bold text-white hover:text-neon"
+                            className={cn(
+                                "text-xl font-bold text-white hover:text-neon transition-all duration-500 ease-out",
+                                isOpen 
+                                    ? "opacity-100 translate-x-0" 
+                                    : "opacity-0 translate-x-12"
+                            )}
+                            style={{ transitionDelay: isOpen ? `${index * 80}ms` : '0ms' }}
                             onClick={() => setIsOpen(false)}
                         >
                             {item.name}

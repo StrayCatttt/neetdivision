@@ -208,13 +208,15 @@ export default function Recruit() {
                         preload="auto"
                     />
                 )}
-                {/* Mobile: Static image */}
+                {/* Mobile: Static image, smaller and centered on black */}
                 {isMobile && (
-                    <img
-                        src="/images/recruit-bg.png"
-                        alt=""
-                        className="w-full h-full object-cover"
-                    />
+                    <div className="w-full h-full flex items-center justify-center bg-black">
+                        <img
+                            src="/images/recruit-bg.png"
+                            alt=""
+                            className="max-w-[70%] max-h-[60%] object-contain opacity-60"
+                        />
+                    </div>
                 )}
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/50 pointer-events-none" />
