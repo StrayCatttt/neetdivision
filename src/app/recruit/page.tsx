@@ -194,9 +194,9 @@ export default function Recruit() {
     }, []);
 
     return (
-        <div ref={containerRef} className="w-full relative bg-transparent min-h-screen">
-            {/* Background: Video on PC, Static image on Mobile */}
-            <div className="fixed top-0 left-0 w-full z-[-1] pointer-events-none bg-black" style={{ height: '100svh' }}>
+        <>
+            {/* Background: completely outside any container for reliable fixed positioning on iOS */}
+            <div className="fixed top-0 left-0 w-full pointer-events-none bg-black" style={{ height: '100svh', zIndex: -1, willChange: 'transform' }}>
                 {/* PC: Video */}
                 {!isMobile && (
                     <video 
@@ -208,94 +208,96 @@ export default function Recruit() {
                         preload="auto"
                     />
                 )}
-                {/* Mobile: Static image, smaller and centered on black */}
+                {/* Mobile: Static image, original size then scaled to 70% */}
                 {isMobile && (
-                    <div className="w-full h-full flex items-center justify-center bg-black">
-                        <img
-                            src="/images/recruit-bg.png"
-                            alt=""
-                            className="max-w-[70%] max-h-[60%] object-contain opacity-60"
-                        />
-                    </div>
+                    <img
+                        src="/images/recruit-bg.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                        style={{ transform: 'scale(0.7)' }}
+                    />
                 )}
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/50 pointer-events-none" />
             </div>
 
-            {/* Content Layer */}
-            <div className="relative z-10 w-full">
-                <style>{`
-                    [data-scroll-reveal] {
-                        opacity: 0;
-                        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-                    }
-                    [data-scroll-reveal="up"] { transform: translateY(30px); }
-                    [data-scroll-reveal].is-revealed { opacity: 1; transform: translateY(0); }
-                `}</style>
+            {/* Main Container */}
+            <div ref={containerRef} className="w-full relative min-h-screen">
+                {/* Content Layer */}
+                <div className="relative z-10 w-full">
+                    <style>{`
+                        [data-scroll-reveal] {
+                            opacity: 0;
+                            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                        }
+                        [data-scroll-reveal="up"] { transform: translateY(30px); }
+                        [data-scroll-reveal].is-revealed { opacity: 1; transform: translateY(0); }
+                    `}</style>
 
-                {/* Hero */}
-                <div className="h-screen flex flex-col items-center justify-center">
-                    <ScrambleTitle />
-                    <div className="mt-8 animate-bounce text-white/60">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M7 13l5 5 5-5" />
-                            <path d="M7 7l5 5 5-5" />
-                        </svg>
+                    {/* Hero */}
+                    <div className="h-screen flex flex-col items-center justify-center">
+                        <ScrambleTitle />
+                        <div className="mt-8 animate-bounce text-white/60">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M7 13l5 5 5-5" />
+                                <path d="M7 7l5 5 5-5" />
+                            </svg>
+                        </div>
                     </div>
-                </div>
 
-                {/* Content */}
-                <div className="max-w-4xl mx-auto px-4 md:px-12 pb-[40px]">
-                    <div className="space-y-16 w-full">
-                        <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border-2 border-red-600 p-8 rounded-sm shadow-2xl">
-                            <h2 className="text-2xl font-bold text-red-500 mb-4 flex items-center gap-2 drop-shadow-md">
-                                ⚠ 警告：人生を棒に振る覚悟はありますか？
-                            </h2>
-                            <div className="space-y-4 text-white leading-relaxed font-body">
-                                <p>
-                                    NEET DIVISIONへの入隊条件は極めて厳格です。
-                                    「仕事をしている」「学業が順調である」「リア充である」
-                                    これらに該当する場合、即座にブラウザを閉じてください。
-                                </p>
-                                <p className="font-bold text-white uppercase tracking-tighter bg-red-600/30 p-4 border-l-4 border-red-600">
-                                    重要：k4senさんのDiscordサーバーに参加していない場合、招集されることはありません。
-                                </p>
+                    {/* Content */}
+                    <div className="max-w-4xl mx-auto px-4 md:px-12 pb-[40px]">
+                        <div className="space-y-16 w-full">
+                            <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border-2 border-red-600 p-8 rounded-sm shadow-2xl">
+                                <h2 className="text-2xl font-bold text-red-500 mb-4 flex items-center gap-2 drop-shadow-md">
+                                    ⚠ 警告：人生を棒に振る覚悟はありますか？
+                                </h2>
+                                <div className="space-y-4 text-white leading-relaxed font-body">
+                                    <p>
+                                        NEET DIVISIONへの入隊条件は極めて厳格です。
+                                        「仕事をしている」「学業が順調である」「リア充である」
+                                        これらに該当する場合、即座にブラウザを閉じてください。
+                                    </p>
+                                    <p className="font-bold text-white uppercase tracking-tighter bg-red-600/30 p-4 border-l-4 border-red-600">
+                                        重要：k4senさんのDiscordサーバーに参加していない場合、招集されることはありません。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 p-8 shadow-2xl">
+                                <h3 className="text-xl font-bold mb-4 text-neon drop-shadow-sm">注意事項</h3>
+                                <ul className="list-disc list-inside space-y-2 text-gray-300 text-sm">
+                                    <li>招集は常に不定期であり、あなたの「待ち時間」が試されます。</li>
+                                    <li>スラムの住人としてのプライドを持ち、トキシックにならないこと。</li>
+                                    <li>一度足を踏み入れれば、戻るべき道はないと思ってください。</li>
+                                </ul>
+                            </div>
+
+                            <div data-scroll-reveal="up" className="bg-neon/10 backdrop-blur-md border border-neon p-8 text-center italic group shadow-2xl">
+                                <p className="text-neon font-bold text-lg mb-4 drop-shadow-md">あなたはk4senさんの真のファンであることを誓いますか？</p>
+                                <a
+                                    href="https://discord.gg/57VqX4DCD7"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block px-8 py-3 bg-neon text-black font-bold uppercase transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(204,255,0,0.4)]"
+                                >
+                                    Discordサーバーに参加
+                                </a>
+                                <p className="mt-4 text-sm text-white tracking-wide drop-shadow-md">※これに参加していないと、スラムの門は開きません。</p>
                             </div>
                         </div>
 
-                        <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 p-8 shadow-2xl">
-                            <h3 className="text-xl font-bold mb-4 text-neon drop-shadow-sm">注意事項</h3>
-                            <ul className="list-disc list-inside space-y-2 text-gray-300 text-sm">
-                                <li>招集は常に不定期であり、あなたの「待ち時間」が試されます。</li>
-                                <li>スラムの住人としてのプライドを持ち、トキシックにならないこと。</li>
-                                <li>一度足を踏み入れれば、戻るべき道はないと思ってください。</li>
-                            </ul>
-                        </div>
-
-                        <div data-scroll-reveal="up" className="bg-neon/10 backdrop-blur-md border border-neon p-8 text-center italic group shadow-2xl">
-                            <p className="text-neon font-bold text-lg mb-4 drop-shadow-md">あなたはk4senさんの真のファンであることを誓いますか？</p>
-                            <a
-                                href="https://discord.gg/57VqX4DCD7"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block px-8 py-3 bg-neon text-black font-bold uppercase transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(204,255,0,0.4)]"
-                            >
-                                Discordサーバーに参加
-                            </a>
-                            <p className="mt-4 text-sm text-white tracking-wide drop-shadow-md">※これに参加していないと、スラムの門は開きません。</p>
+                        <div data-scroll-reveal="up" className="mt-16 pb-4 text-center text-zinc-400 font-bold tracking-widest text-xs">
+                            <a href="https://github.com/Slum-Dev/neetdiv_form" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
+                                Recruit System
+                            </a> Developed by SLUM DEV
                         </div>
                     </div>
 
-                    <div data-scroll-reveal="up" className="mt-16 pb-4 text-center text-zinc-400 font-bold tracking-widest text-xs">
-                        <a href="https://github.com/Slum-Dev/neetdiv_form" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
-                            Recruit System
-                        </a> Developed by SLUM DEV
-                    </div>
+                    {/* Extra scroll space for video reverse buffer (PC only) */}
+                    {!isMobile && <div className="h-[30vh]" aria-hidden="true" />}
                 </div>
-
-                {/* Extra scroll space for video reverse buffer (PC only) */}
-                {!isMobile && <div className="h-[30vh]" aria-hidden="true" />}
             </div>
-        </div>
+        </>
     );
 }
