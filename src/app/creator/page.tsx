@@ -1,5 +1,5 @@
 "use client";
-import { Twitter, Monitor, ExternalLink } from 'lucide-react';
+import { Twitter, Monitor, ExternalLink, Globe } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Creator() {
@@ -107,6 +107,25 @@ export default function Creator() {
                                     {/* Subtle Overlay to blend with Left side */}
                                     <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-zinc-900 to-transparent z-10 hidden lg:block"></div>
                                 </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {/* Wplace Link Button */}
+                    <div className="flex justify-center mt-8">
+                        <a 
+                            href="https://wplace.live/?lat=34.956914812856155&lng=140.27985351562498&zoom=15"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-white hover:bg-zinc-100 transition-all duration-300 rounded-lg p-2 w-44 h-16 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_35px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 group"
+                        >
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src="/images/wplace-logo.png"
+                                    alt="Wplace"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                         </a>
                     </div>
