@@ -208,13 +208,12 @@ export default function Recruit() {
                         preload="auto"
                     />
                 )}
-                {/* Mobile: Static image, original size then scaled to 70% */}
+                {/* Mobile: Static image, full cover, 70% opacity */}
                 {isMobile && (
                     <img
                         src="/images/recruit-bg.png"
                         alt=""
-                        className="w-full h-full object-cover"
-                        style={{ transform: 'scale(0.7)' }}
+                        className="w-full h-full object-cover opacity-70"
                     />
                 )}
                 {/* Dark Overlay */}
