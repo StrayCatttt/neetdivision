@@ -92,17 +92,20 @@ export default function Recruit() {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const maxScroll = cachedMaxScrollRef.current;
             
-            const rawP = scrollTop / maxScroll;
+            const rawP = Math.max(0, Math.min(1, scrollTop / maxScroll));
             
-            // Clamp: if overscrolled past bottom, mirror back (reverse)
-            let p: number;
-            if (rawP > 1) {
-                p = Math.max(0, 2 - rawP);
+            // Map scroll progress to video progress:
+            // 0.00 - 0.85 → video plays forward  (0 → 1)
+            // 0.85 - 1.00 → video plays backward (1 → ~0.7)
+            // This creates a built-in reverse buffer that works on all devices
+            let videoP: number;
+            if (rawP <= 0.85) {
+                videoP = rawP / 0.85; // 0 → 1
             } else {
-                p = Math.max(0, rawP);
+                videoP = 1 - ((rawP - 0.85) / 0.15) * 0.3; // 1 → 0.7
             }
             
-            progressRef.current = p;
+            progressRef.current = Math.max(0, Math.min(1, videoP));
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -269,6 +272,9 @@ export default function Recruit() {
                         </a> Developed by SLUM DEV
                     </div>
                 </div>
+
+                {/* Extra scroll space for video reverse buffer */}
+                <div className="h-[30vh]" aria-hidden="true" />
             </div>
         </div>
     );
