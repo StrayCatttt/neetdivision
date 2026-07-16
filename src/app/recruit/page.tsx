@@ -117,19 +117,28 @@ export default function Recruit() {
     }, []);
 
     // Video scrubbing render loop
+    const TOTAL_STEPS = 60; // Divide video into 60 discrete frames
+    const lastStepRef = useRef(-1);
+    
     useEffect(() => {
         const loop = () => {
             if (!document.hidden && videoRef.current) {
                 const video = videoRef.current;
 
                 if (!isNaN(video.duration) && video.duration > 0) {
-                    // Clamp to duration - 0.05 to avoid end-of-video boundary issues
                     const maxTime = video.duration - 0.05;
-                    const targetTime = Math.min(progressRef.current * video.duration, maxTime);
                     
-                    // Directly set without slow easing to ensure last frame is correct
-                    if (!video.seeking && Math.abs(video.currentTime - targetTime) > 0.01) {
-                        video.currentTime = targetTime;
+                    // Quantize progress into discrete steps
+                    const step = Math.round(progressRef.current * TOTAL_STEPS);
+                    const stepProgress = step / TOTAL_STEPS;
+                    const targetTime = Math.min(stepProgress * video.duration, maxTime);
+                    
+                    // Smooth easing towards the target step
+                    currentTimeRef.current += (targetTime - currentTimeRef.current) * 0.15;
+                    
+                    // Only seek if the step changed or we're still easing
+                    if (!video.seeking && Math.abs(video.currentTime - currentTimeRef.current) > 0.01) {
+                        video.currentTime = currentTimeRef.current;
                     }
                 }
             }
