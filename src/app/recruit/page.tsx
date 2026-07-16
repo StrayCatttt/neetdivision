@@ -72,7 +72,25 @@ export default function Recruit() {
             const docHeight = document.documentElement.scrollHeight;
             const windowHeight = window.innerHeight;
             const maxScroll = docHeight - windowHeight;
-            const p = maxScroll > 0 ? Math.max(0, Math.min(1, scrollTop / maxScroll)) : 0;
+            
+            if (maxScroll <= 0) {
+                progressRef.current = 0;
+                return;
+            }
+            
+            const rawP = scrollTop / maxScroll;
+            
+            // Handle overscroll (mobile rubber-banding):
+            // If scrolled past bottom, mirror back so video reverses
+            let p: number;
+            if (rawP > 1) {
+                p = Math.max(0, 1 - (rawP - 1));
+            } else if (rawP < 0) {
+                p = 0;
+            } else {
+                p = rawP;
+            }
+            
             progressRef.current = p;
         };
 
