@@ -52,6 +52,7 @@ export default function Recruit() {
     const currentTimeRef = useRef(0);
     const animationFrameId = useRef<number | null>(null);
     const progressRef = useRef(0);
+    const cachedMaxScrollRef = useRef(0);
 
     // Initial setup for iOS Safari (requires play/pause to unlock decoder)
     useEffect(() => {
@@ -65,30 +66,40 @@ export default function Recruit() {
         }
     }, []);
 
+    // Cache maxScroll on load and resize only (not during scroll)
+    // This prevents iOS Safari's dynamic toolbar from changing the calculation mid-scroll
+    useEffect(() => {
+        const updateMaxScroll = () => {
+            const docHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            cachedMaxScrollRef.current = Math.max(1, docHeight - windowHeight);
+        };
+
+        updateMaxScroll();
+        // Delay a second update to catch any layout shifts after initial render
+        const timeout = setTimeout(updateMaxScroll, 500);
+
+        window.addEventListener('resize', updateMaxScroll);
+        return () => {
+            window.removeEventListener('resize', updateMaxScroll);
+            clearTimeout(timeout);
+        };
+    }, []);
+
     // Scroll mapping for video
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight;
-            const windowHeight = window.innerHeight;
-            const maxScroll = docHeight - windowHeight;
-            
-            if (maxScroll <= 0) {
-                progressRef.current = 0;
-                return;
-            }
+            const maxScroll = cachedMaxScrollRef.current;
             
             const rawP = scrollTop / maxScroll;
             
-            // Handle overscroll (mobile rubber-banding):
-            // If scrolled past bottom, mirror back so video reverses
+            // Clamp: if overscrolled past bottom, mirror back (reverse)
             let p: number;
             if (rawP > 1) {
-                p = Math.max(0, 1 - (rawP - 1));
-            } else if (rawP < 0) {
-                p = 0;
+                p = Math.max(0, 2 - rawP);
             } else {
-                p = rawP;
+                p = Math.max(0, rawP);
             }
             
             progressRef.current = p;
@@ -170,7 +181,8 @@ export default function Recruit() {
     return (
         <div ref={containerRef} className="w-full relative bg-transparent min-h-screen">
             {/* Background Video Layer - Fixed behind content */}
-            <div className="fixed inset-0 z-[-1] pointer-events-none bg-black">
+            {/* Use fixed pixel height from svh to prevent iOS Safari toolbar resize causing zoom */}
+            <div className="fixed top-0 left-0 w-full z-[-1] pointer-events-none bg-black" style={{ height: '100svh' }}>
                 <video 
                     ref={videoRef}
                     src="/videos/recruit-bg.mp4" 
