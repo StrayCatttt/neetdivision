@@ -36,17 +36,34 @@ export default function Creator() {
                                     マウスとキーボードより猫の肉球を触りたい。
                                 </p>
                                 <div className="flex flex-col gap-4 items-start">
-                                    <div className="flex gap-6 justify-center md:justify-start items-center">
-                                        <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon active:scale-90 transition-all">
+                                    <div className="flex flex-wrap gap-6 justify-center md:justify-start items-center">
+                                        <a href="https://x.com/4EXP_" target="_blank" rel="noopener noreferrer" className="p-3 bg-black border border-zinc-800 rounded-full hover:text-neon hover:border-neon active:scale-90 transition-all shrink-0">
                                             <Twitter size={28} />
                                         </a>
 
                                         <button
                                             disabled
-                                            className="px-6 py-3 bg-zinc-800 text-zinc-500 font-bold uppercase cursor-not-allowed flex items-center gap-2 transition-all opacity-50"
+                                            className="px-6 py-3 bg-zinc-800 text-zinc-500 font-bold uppercase cursor-not-allowed flex items-center gap-2 transition-all opacity-50 shrink-0"
                                         >
                                             お布団と融合中
                                         </button>
+
+                                        {/* Wplace Link Button */}
+                                        <a 
+                                            href="https://wplace.live/?lat=34.956914812856155&lng=140.27985351562498&zoom=15"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center bg-white hover:bg-zinc-100 transition-all duration-300 rounded-lg p-2 w-36 h-12 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_35px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 group shrink-0"
+                                        >
+                                            <div className="relative w-full h-full">
+                                                <Image
+                                                    src="/images/wplace-logo.png"
+                                                    alt="Wplace"
+                                                    fill
+                                                    className="object-contain"
+                                                />
+                                            </div>
+                                        </a>
                                     </div>
 
                                     <span className="inline-block text-sm font-bold border-b border-neon text-neon hover:border-white hover:text-white active:scale-95 transition-all w-fit cursor-pointer">
@@ -107,25 +124,6 @@ export default function Creator() {
                                     {/* Subtle Overlay to blend with Left side */}
                                     <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-zinc-900 to-transparent z-10 hidden lg:block"></div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    {/* Wplace Link Button */}
-                    <div className="flex justify-center mt-8">
-                        <a 
-                            href="https://wplace.live/?lat=34.956914812856155&lng=140.27985351562498&zoom=15"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center bg-white hover:bg-zinc-100 transition-all duration-300 rounded-lg p-2 w-44 h-16 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_35px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 group"
-                        >
-                            <div className="relative w-full h-full">
-                                <Image
-                                    src="/images/wplace-logo.png"
-                                    alt="Wplace"
-                                    fill
-                                    className="object-contain"
-                                />
                             </div>
                         </a>
                     </div>
