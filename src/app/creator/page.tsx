@@ -31,9 +31,7 @@ export default function Creator() {
                                 <h2 className="text-5xl font-bold mb-2 tracking-widest">Stray</h2>
                                 <p className="text-neon font-bold tracking-[0.3em] mb-6 text-xl">MAIN DEVELOPER</p>
                                 <p className="text-gray-300 text-lg leading-relaxed mb-8 font-body">
-                                    サイトを作るノウハウが1ミリもない哀れな開発者。
-                                    LoL自体はプレイしておらず、配信ばかり見ている猫が好きなだけのオタク。
-                                    マウスとキーボードより猫の肉球を触りたい。
+                                    猫が好き
                                 </p>
                                 <div className="flex flex-col gap-4 items-start">
                                     <div className="flex flex-wrap gap-6 justify-center md:justify-start items-center">
