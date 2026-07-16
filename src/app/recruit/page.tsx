@@ -43,32 +43,42 @@ function ScrambleTitle() {
     );
 }
 
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+    return isMobile;
+}
+
 export default function Recruit() {
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const isMobile = useIsMobile();
 
-    // Refs for animation loop
-    const targetTimeRef = useRef(0);
+    // Refs for video scrubbing (PC only)
     const currentTimeRef = useRef(0);
     const animationFrameId = useRef<number | null>(null);
     const progressRef = useRef(0);
     const cachedMaxScrollRef = useRef(0);
 
-    // Initial setup for iOS Safari (requires play/pause to unlock decoder)
+    // iOS Safari: prime the video decoder (PC only)
     useEffect(() => {
+        if (isMobile) return;
         const video = videoRef.current;
         if (video) {
             video.play().then(() => {
                 video.pause();
-            }).catch(() => {
-                // Ignore autoplay policy errors
-            });
+            }).catch(() => {});
         }
-    }, []);
+    }, [isMobile]);
 
-    // Cache maxScroll on load and resize only (not during scroll)
-    // This prevents iOS Safari's dynamic toolbar from changing the calculation mid-scroll
+    // Cache maxScroll (PC only)
     useEffect(() => {
+        if (isMobile) return;
         const updateMaxScroll = () => {
             const docHeight = document.documentElement.scrollHeight;
             const windowHeight = window.innerHeight;
@@ -76,7 +86,6 @@ export default function Recruit() {
         };
 
         updateMaxScroll();
-        // Delay a second update to catch any layout shifts after initial render
         const timeout = setTimeout(updateMaxScroll, 500);
 
         window.addEventListener('resize', updateMaxScroll);
@@ -84,27 +93,26 @@ export default function Recruit() {
             window.removeEventListener('resize', updateMaxScroll);
             clearTimeout(timeout);
         };
-    }, []);
+    }, [isMobile]);
 
-    // Scroll mapping for video
+    // Scroll mapping for video (PC only)
     useEffect(() => {
+        if (isMobile) return;
         const handleScroll = () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const maxScroll = cachedMaxScrollRef.current;
-            
+
             const rawP = Math.max(0, Math.min(1, scrollTop / maxScroll));
-            
-            // Map scroll progress to video progress:
-            // 0.00 - 0.85 → video plays forward  (0 → 1)
-            // 0.85 - 1.00 → video plays backward (1 → ~0.7)
-            // This creates a built-in reverse buffer that works on all devices
+
+            // 0.00 - 0.85 → video forward (0→1)
+            // 0.85 - 1.00 → video backward (1→~0.7)
             let videoP: number;
             if (rawP <= 0.85) {
-                videoP = rawP / 0.85; // 0 → 1
+                videoP = rawP / 0.85;
             } else {
-                videoP = 1 - ((rawP - 0.85) / 0.15) * 0.3; // 1 → 0.7
+                videoP = 1 - ((rawP - 0.85) / 0.15) * 0.3;
             }
-            
+
             progressRef.current = Math.max(0, Math.min(1, videoP));
         };
 
@@ -114,29 +122,24 @@ export default function Recruit() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [isMobile]);
 
-    // Video scrubbing render loop
-    const TOTAL_STEPS = 60; // Divide video into 60 discrete frames
-    const lastStepRef = useRef(-1);
-    
+    // Video scrubbing render loop (PC only)
     useEffect(() => {
+        if (isMobile) return;
+
         const loop = () => {
             if (!document.hidden && videoRef.current) {
                 const video = videoRef.current;
 
                 if (!isNaN(video.duration) && video.duration > 0) {
                     const maxTime = video.duration - 0.05;
-                    
-                    // Quantize progress into discrete steps
-                    const step = Math.round(progressRef.current * TOTAL_STEPS);
-                    const stepProgress = step / TOTAL_STEPS;
+                    const step = Math.round(progressRef.current * 60);
+                    const stepProgress = step / 60;
                     const targetTime = Math.min(stepProgress * video.duration, maxTime);
-                    
-                    // Smooth easing towards the target step
+
                     currentTimeRef.current += (targetTime - currentTimeRef.current) * 0.15;
-                    
-                    // Only seek if the step changed or we're still easing
+
                     if (!video.seeking && Math.abs(video.currentTime - currentTimeRef.current) > 0.01) {
                         video.currentTime = currentTimeRef.current;
                     }
@@ -161,9 +164,9 @@ export default function Recruit() {
             if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, []);
+    }, [isMobile]);
 
-    // IntersectionObserver for fade-in (same as About page)
+    // IntersectionObserver for fade-in
     useEffect(() => {
         const observerOptions = {
             root: null,
@@ -192,22 +195,32 @@ export default function Recruit() {
 
     return (
         <div ref={containerRef} className="w-full relative bg-transparent min-h-screen">
-            {/* Background Video Layer - Fixed behind content */}
-            {/* Use fixed pixel height from svh to prevent iOS Safari toolbar resize causing zoom */}
+            {/* Background: Video on PC, Static image on Mobile */}
             <div className="fixed top-0 left-0 w-full z-[-1] pointer-events-none bg-black" style={{ height: '100svh' }}>
-                <video 
-                    ref={videoRef}
-                    src="/videos/recruit-bg.mp4" 
-                    className="w-full h-full object-cover"
-                    playsInline 
-                    muted 
-                    preload="auto"
-                />
-                {/* Dark Overlay for readability */}
+                {/* PC: Video */}
+                {!isMobile && (
+                    <video 
+                        ref={videoRef}
+                        src="/videos/recruit-bg.mp4" 
+                        className="w-full h-full object-cover"
+                        playsInline 
+                        muted 
+                        preload="auto"
+                    />
+                )}
+                {/* Mobile: Static image */}
+                {isMobile && (
+                    <img
+                        src="/images/recruit-bg.png"
+                        alt=""
+                        className="w-full h-full object-cover"
+                    />
+                )}
+                {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/50 pointer-events-none" />
             </div>
 
-            {/* Content Layer - Normal scrolling */}
+            {/* Content Layer */}
             <div className="relative z-10 w-full">
                 <style>{`
                     [data-scroll-reveal] {
@@ -218,7 +231,7 @@ export default function Recruit() {
                     [data-scroll-reveal].is-revealed { opacity: 1; transform: translateY(0); }
                 `}</style>
 
-                {/* Hero - Full viewport, only title + arrow */}
+                {/* Hero */}
                 <div className="h-screen flex flex-col items-center justify-center">
                     <ScrambleTitle />
                     <div className="mt-8 animate-bounce text-white/60">
@@ -229,10 +242,9 @@ export default function Recruit() {
                     </div>
                 </div>
 
-                {/* Content below the fold */}
+                {/* Content */}
                 <div className="max-w-4xl mx-auto px-4 md:px-12 pb-[40px]">
                     <div className="space-y-16 w-full">
-                        {/* Warning Box */}
                         <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border-2 border-red-600 p-8 rounded-sm shadow-2xl">
                             <h2 className="text-2xl font-bold text-red-500 mb-4 flex items-center gap-2 drop-shadow-md">
                                 ⚠ 警告：人生を棒に振る覚悟はありますか？
@@ -249,7 +261,6 @@ export default function Recruit() {
                             </div>
                         </div>
 
-                        {/* Notes Box */}
                         <div data-scroll-reveal="up" className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 p-8 shadow-2xl">
                             <h3 className="text-xl font-bold mb-4 text-neon drop-shadow-sm">注意事項</h3>
                             <ul className="list-disc list-inside space-y-2 text-gray-300 text-sm">
@@ -259,7 +270,6 @@ export default function Recruit() {
                             </ul>
                         </div>
 
-                        {/* Discord Call to Action */}
                         <div data-scroll-reveal="up" className="bg-neon/10 backdrop-blur-md border border-neon p-8 text-center italic group shadow-2xl">
                             <p className="text-neon font-bold text-lg mb-4 drop-shadow-md">あなたはk4senさんの真のファンであることを誓いますか？</p>
                             <a
@@ -274,7 +284,6 @@ export default function Recruit() {
                         </div>
                     </div>
 
-                    {/* Footer - at very bottom */}
                     <div data-scroll-reveal="up" className="mt-16 pb-4 text-center text-zinc-400 font-bold tracking-widest text-xs">
                         <a href="https://github.com/Slum-Dev/neetdiv_form" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
                             Recruit System
@@ -282,8 +291,8 @@ export default function Recruit() {
                     </div>
                 </div>
 
-                {/* Extra scroll space for video reverse buffer */}
-                <div className="h-[30vh]" aria-hidden="true" />
+                {/* Extra scroll space for video reverse buffer (PC only) */}
+                {!isMobile && <div className="h-[30vh]" aria-hidden="true" />}
             </div>
         </div>
     );
