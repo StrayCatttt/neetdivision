@@ -1,8 +1,179 @@
 "use client";
 import Image from "next/image";
 import { Twitter, Youtube, Twitch, Instagram, ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom";
+
+function HoverImageReveal({ href, children }: { href: string; children: React.ReactNode }) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const imgRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    const mousePos = useRef({ x: 0, y: 0 });
+    const imgPos = useRef({ x: 0, y: 0 });
+    const rafId = useRef<number | null>(null);
+
+    useEffect(() => {
+        setMounted(true);
+        setIsMobile(window.innerWidth < 768);
+        // Preload image
+        const img = new window.Image();
+        img.src = '/images/original-slum.png';
+    }, []);
+
+    const animate = useCallback(() => {
+        if (!imgRef.current) return;
+        
+        // Lerp interpolation (0.04) for smooth "floaty" following with extra residual lag
+        imgPos.current.x += (mousePos.current.x - imgPos.current.x) * 0.04;
+        imgPos.current.y += (mousePos.current.y - imgPos.current.y) * 0.04;
+        
+        const imgW = 480;
+        const imgH = 270;
+        const offset = 40;
+        
+        let x = 0;
+        let y = 0;
+        
+        // Switch to "directly underneath" when page width is narrow (< 1100px)
+        const isNarrow = window.innerWidth < 1100;
+        
+        if (isNarrow) {
+            // Directly underneath (centered horizontally relative to cursor)
+            x = imgPos.current.x - imgW / 2;
+            y = imgPos.current.y + offset;
+        } else {
+            // Bottom-right
+            x = imgPos.current.x + offset;
+            y = imgPos.current.y + offset;
+        }
+        
+        // Flip to left side if overflowing right (only when in bottom-right layout)
+        if (!isNarrow && (x + imgW > window.innerWidth - 20)) {
+            x = imgPos.current.x - offset - imgW;
+        }
+        
+        // Clamp vertical
+        if (y < 20) y = 20;
+        if (y + imgH > window.innerHeight - 20) {
+            if (isNarrow) {
+                // If narrow and overflows bottom, show directly above cursor instead
+                y = imgPos.current.y - offset - imgH;
+            } else {
+                y = window.innerHeight - 20 - imgH;
+            }
+        }
+        
+        // Clamp horizontal
+        if (x < 20) x = 20;
+        if (x + imgW > window.innerWidth - 20) {
+            x = window.innerWidth - 20 - imgW;
+        }
+        
+        imgRef.current.style.left = `${x}px`;
+        imgRef.current.style.top = `${y}px`;
+        
+        rafId.current = requestAnimationFrame(animate);
+    }, []);
+
+    const handleMouseEnter = useCallback((e: React.MouseEvent) => {
+        if (isMobile) return;
+        // Initialize image position directly to current cursor client coordinates
+        mousePos.current = { x: e.clientX, y: e.clientY };
+        imgPos.current = { x: e.clientX, y: e.clientY };
+        setIsHovered(true);
+        rafId.current = requestAnimationFrame(animate);
+    }, [isMobile, animate]);
+
+    const handleMouseLeave = useCallback(() => {
+        setIsHovered(false);
+        if (rafId.current) {
+            cancelAnimationFrame(rafId.current);
+            rafId.current = null;
+        }
+    }, []);
+
+    const handleMouseMove = useCallback((e: React.MouseEvent) => {
+        mousePos.current = { x: e.clientX, y: e.clientY };
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            if (rafId.current) cancelAnimationFrame(rafId.current);
+        };
+    }, []);
+
+    const slideEasing = 'cubic-bezier(0.33, 1, 0.68, 1)';
+
+    return (
+        <div
+            ref={containerRef}
+            className="inline-block relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={handleMouseMove}
+        >
+            <a href={href} target="_blank" rel="noopener noreferrer" className="inline-block active:scale-95 active:opacity-85 transition-all duration-150 ease-out origin-center">
+                {/* Text slider: overflow hidden clips to 1 line height */}
+                <span
+                    className="inline-block overflow-hidden relative"
+                    style={{ height: '1.2em', lineHeight: '1.2em', verticalAlign: 'bottom' }}
+                >
+                    {/* Default text - slides up and out on hover */}
+                    <span
+                        className="block"
+                        style={{
+                            transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+                            transition: `transform 0.3s ${slideEasing}`,
+                        }}
+                    >
+                        {children}
+                    </span>
+                    {/* Hover text (neon) - slides up into view on hover */}
+                    <span
+                        className="block text-neon"
+                        style={{
+                            position: 'absolute',
+                            left: 0,
+                            top: '100%',
+                            width: '100%',
+                            transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+                            transition: `transform 0.3s ${slideEasing}`,
+                        }}
+                    >
+                        {children}
+                    </span>
+                </span>
+            </a>
+            {/* Hover Image Window rendered inside React Portal to completely escape z-index constraints */}
+            {mounted && !isMobile && createPortal(
+                <div
+                    ref={imgRef}
+                    className="fixed pointer-events-none rounded-xl overflow-hidden shadow-2xl"
+                    style={{
+                        width: 480,
+                        height: 270,
+                        zIndex: 9999,
+                        opacity: isHovered ? 1 : 0,
+                        transform: isHovered ? 'scale(1)' : 'scale(0.95)',
+                        transition: isHovered
+                            ? 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                            : 'opacity 0.2s ease-in, transform 0.2s ease-in',
+                    }}
+                >
+                    <img
+                        src="/images/original-slum.png"
+                        alt="NEET DIVISION Original Site"
+                        className="w-full h-full object-cover"
+                    />
+                </div>,
+                document.body
+            )}
+        </div>
+    );
+}
 
 export default function About() {
     const bgRef = useRef<HTMLDivElement>(null);
@@ -314,10 +485,10 @@ export default function About() {
                 </div>
 
                 {/* Original Site Link */}
-                <div data-scroll-reveal="up" className="text-center text-zinc-500 font-bold tracking-widest text-lg">
-                    <a href="https://neetdi.vision/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors duration-300">
+                <div data-scroll-reveal="up" className="text-center text-zinc-500 font-bold tracking-widest text-4xl">
+                    <HoverImageReveal href="https://neetdi.vision/">
                         NEET DIVISION ORIGINAL SITE
-                    </a>
+                    </HoverImageReveal>
                 </div>
             </div>
 
