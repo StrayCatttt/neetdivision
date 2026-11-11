@@ -20,6 +20,7 @@ export default function ScrollToTop() {
   }, []);
 
   const scrollToTop = () => {
+    if (!window.dispatchEvent(new Event("site:return-to-top", { cancelable: true }))) return;
     window.scrollTo({
       top: 0,
       behavior: "smooth",

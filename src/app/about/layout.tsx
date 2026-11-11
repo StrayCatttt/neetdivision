@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import '@fontsource/noto-sans-jp/400.css';
+import '@fontsource/noto-sans-jp/700.css';
 
 export const metadata: Metadata = {
   title: 'ABOUT | NEET DIVISION',

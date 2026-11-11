@@ -205,13 +205,13 @@ export default function Recruit() {
                         className="w-full h-full object-cover"
                         playsInline 
                         muted 
-                        preload="auto"
+                        preload="metadata"
                     />
                 )}
                 {/* Mobile: Static image, full cover, 70% opacity */}
                 {isMobile && (
                     <img
-                        src="/images/recruit-bg.png"
+                        src="/images/recruit-bg.webp"
                         alt=""
                         className="w-full h-full object-cover opacity-70"
                     />

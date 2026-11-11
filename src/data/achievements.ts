@@ -10,6 +10,15 @@ export type Achievement = {
 
 export const achievementsData: Achievement[] = [
   {
+    id: "ltk4",
+    date: "2026 10 - 11",
+    title: "League The k4sen #4",
+    description: "過去最高レベルのLTKに元プロやチャレンジャーなどのNEET DIVISION屈指の精鋭部隊が参戦した。",
+    image: "/images/ltk4.webp",
+    link: "https://league.thek4sen.com/Finale_Playoffs/",
+    linkLabel: "VISIT LTK WEBSITE"
+  },
+  {
     id: "ltk3",
     date: "2026.05 - 06",
     title: "League the k4sen #3",

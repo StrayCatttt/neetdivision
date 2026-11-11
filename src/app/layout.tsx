@@ -76,12 +76,12 @@ export default function RootLayout({
         <html lang="ja">
             <head>
                 {/* Google AdSense */}
-                <Script
+                {process.env.NODE_ENV === "production" && process.env.NEET_PREVIEW_BUILD !== "1" && <Script
                     async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9269179060215740"
                     crossOrigin="anonymous"
-                    strategy="beforeInteractive"
-                />
+                    strategy="afterInteractive"
+                />}
             </head>
             <body className={cn(futuraBold.variable, futuraLight.variable, "bg-black text-white font-sans selection:bg-neon selection:text-black")}>
                 <meta name="color-scheme" content="light" />
